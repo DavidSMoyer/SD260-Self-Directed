@@ -22,3 +22,26 @@ nav {
   color: #d126a1;
   margin: 15px 0;
 }
+
+.search {
+  position: fixed;
+  left: 50%;
+  top: 20px;
+  transform: translate(-50%, 0%);
+  width: 100%;
+  text-align: center;
+}
+
+.search-field {
+  border-radius: 20%;
+  width: 20%;
+}
+
+.search-field:focus-within,
+.search-field:hover {
+  width: 40%;
+}
+
+.search-field fieldset {
+  border-radius: 20px;
+}

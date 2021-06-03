@@ -9,11 +9,12 @@ import {Link} from 'react-router-dom';
 function Navbar() {
   return (
     <nav>
-      <Link to="/" className="link-icon"><PersonIcon style={{"fontSize": 35}} /></Link>
-      <Link to="/" className="link-icon"><EmojiPeopleIcon style={{"fontSize": 35}} /></Link>
-      <Link to="/" className="link-icon"><AddIcon style={{"fontSize": 45}} /></Link>
+      {/* Add user's own id */}
+      <Link to="/account/user-id" className="link-icon"><PersonIcon style={{"fontSize": 35}} /></Link>
+      <Link to="/follow-timeline" className="link-icon"><EmojiPeopleIcon style={{"fontSize": 35}} /></Link>
+      <Link to="/create" className="link-icon"><AddIcon style={{"fontSize": 45}} /></Link>
       <Link to="/" className="link-icon"><HomeIcon style={{"fontSize": 35}} /></Link>
-      <Link to="/" className="link-icon">
+      <Link to="/alerts" className="link-icon">
         <Badge badgeContent={0} color="secondary">
           <NotificationsIcon style={{"fontSize": 35}} />
         </Badge>
