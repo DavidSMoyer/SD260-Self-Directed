@@ -3,6 +3,7 @@ import {Route, Switch, useHistory} from 'react-router-dom';
 import Navbar from './Navbar.js';
 import {TextField} from '@material-ui/core';
 import {useState} from 'react';
+import Post from './Post.js';
 
 function App() {
   const [query, setQuery] = useState("");
@@ -13,6 +14,14 @@ function App() {
     history.push(`/search/${query}`);
   }
 
+  const postTest = {
+    title: "Post Title",
+    imageURL: "https://tse3.mm.bing.net/th?id=OIP.mDzIoaqnw_whAiaTSz4iwgHaFj&pid=Api&P=0&w=214&h=161",
+    content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea earum at explicabo, voluptatem itaque iste sunt eum nesciunt, atque quam quod qui aliquid consequatur optio ut velit architecto voluptate sed.",
+    likes: 200,
+    comments: [{}, {}, {}, {}, {}, {}]
+  }
+
   return (
     <>
       <form className="search" onSubmit={search}>
@@ -21,7 +30,11 @@ function App() {
       <div className="layout-grid">
         <Navbar />
         {<Switch>
-          <Route exact path="/"></Route>
+          <Route exact path="/">
+            <div>
+              <Post post={postTest}/>
+            </div>
+          </Route>
           <Route exact path="/follow-timeline"></Route>
           <Route exact path="/signup"></Route>
           <Route exact path="/login"></Route>
