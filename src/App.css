@@ -47,12 +47,21 @@ nav {
   border-radius: 20px;
 }
 
+.post-link {
+  display: inline-block;
+  color: black;
+  text-decoration: none;
+  height: 100px;
+}
+
 .post {
+  display: inline-block;
   width: 300px;
   height: auto;
   border-radius: 10px;
   background-color: white;
   padding-bottom: 10px;
+  margin: 20px;
 }
 
 .post h3 {
@@ -80,4 +89,9 @@ nav {
   display: flex;
   align-items: center;
   justify-items: space-between;
+}
+
+.post-list {
+  padding-top: 100px;
+  display: flex;
 }

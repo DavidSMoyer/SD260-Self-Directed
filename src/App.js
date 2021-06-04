@@ -4,6 +4,7 @@ import Navbar from './Navbar.js';
 import {TextField} from '@material-ui/core';
 import {useState} from 'react';
 import Post from './Post.js';
+import PostList from './PostList.js';
 
 function App() {
   const [query, setQuery] = useState("");
@@ -14,14 +15,32 @@ function App() {
     history.push(`/search/${query}`);
   }
 
-  const postTest = {
-    title: "Post Title",
-    imageURL: "https://tse3.mm.bing.net/th?id=OIP.mDzIoaqnw_whAiaTSz4iwgHaFj&pid=Api&P=0&w=214&h=161",
-    content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea earum at explicabo, voluptatem itaque iste sunt eum nesciunt, atque quam quod qui aliquid consequatur optio ut velit architecto voluptate sed.",
-    likes: 200,
-    comments: [{}, {}, {}, {}, {}, {}],
-    id: "12345"
-  }
+  const postList = [
+    {
+      title: "Post Title",
+      imageURL: "https://tse3.mm.bing.net/th?id=OIP.mDzIoaqnw_whAiaTSz4iwgHaFj&pid=Api&P=0&w=214&h=161",
+      content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea earum at explicabo, voluptatem itaque iste sunt eum nesciunt, atque quam quod qui aliquid consequatur optio ut velit architecto voluptate sed.",
+      likes: 200,
+      comments: [{}, {}, {}, {}, {}, {}],
+      id: "12345"
+    },
+    {
+      title: "Post Title 2",
+      imageURL: "https://tse3.mm.bing.net/th?id=OIP.mDzIoaqnw_whAiaTSz4iwgHaFj&pid=Api&P=0&w=214&h=161",
+      content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea earum at explicabo, voluptatem itaque iste sunt eum nesciunt, atque quam quod qui aliquid consequatur optio ut velit architecto voluptate sed.",
+      likes: 200,
+      comments: [{}, {}, {}, {}, {}, {}],
+      id: "12345"
+    },
+    {
+      title: "Post Title 3",
+      imageURL: "https://tse3.mm.bing.net/th?id=OIP.mDzIoaqnw_whAiaTSz4iwgHaFj&pid=Api&P=0&w=214&h=161",
+      content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea earum at explicabo, voluptatem itaque iste sunt eum nesciunt, atque quam quod qui aliquid consequatur optio ut velit architecto voluptate sed.",
+      likes: 200,
+      comments: [{}, {}, {}, {}, {}, {}],
+      id: "12345"
+    }
+  ]
 
   return (
     <>
@@ -32,9 +51,7 @@ function App() {
         <Navbar />
         {<Switch>
           <Route exact path="/">
-            <div>
-              <Post post={postTest}/>
-            </div>
+            <PostList posts={postList} type="main" />
           </Route>
           <Route exact path="/follow-timeline"></Route>
           <Route exact path="/signup"></Route>

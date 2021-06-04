@@ -14,7 +14,7 @@ function Post({post}) {
 
 
   return (
-    <Link to={`/post/${post.id}`}>
+    <Link to={`/post/${post.id}`} className="post-link">
       <div className="post">
         <h3>{post.title}</h3>
         {post.imageURL !== undefined && <img src={post.imageURL}/>}
