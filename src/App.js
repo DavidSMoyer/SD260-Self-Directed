@@ -5,6 +5,7 @@ import {TextField} from '@material-ui/core';
 import {useState} from 'react';
 import Post from './Post.js';
 import PostList from './PostList.js';
+import FullPost from './FullPost.js';
 
 function App() {
   const [query, setQuery] = useState("");
@@ -53,12 +54,16 @@ function App() {
           <Route exact path="/">
             <PostList posts={postList} type="main" />
           </Route>
-          <Route exact path="/follow-timeline"></Route>
+          <Route exact path="/follow-timeline">
+            <PostList posts={postList} type="follow" />
+          </Route>
           <Route exact path="/signup"></Route>
           <Route exact path="/login"></Route>
           <Route exact path="/create"></Route>
-          <Route path="/post/:post-id"></Route>
-          <Route path="/account/:account-id"></Route>
+          <Route path="/post/:postId">
+            <FullPost />
+          </Route>
+          <Route path="/account/:accountId"></Route>
           <Route path="/search/:query"></Route>
         </Switch>}
       </div>

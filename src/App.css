@@ -1,6 +1,6 @@
 .layout-grid {
   display: grid;
-  grid-template-columns: 10% 1fr;
+  grid-template-columns: 7.5% 1fr;
   width: 100%;
   height: 100vh;
 }
@@ -56,12 +56,12 @@ nav {
 
 .post {
   display: inline-block;
-  width: 300px;
+  width: 275px;
   height: auto;
   border-radius: 10px;
   background-color: white;
   padding-bottom: 10px;
-  margin: 20px;
+  margin: 10px;
 }
 
 .post h3 {
@@ -112,4 +112,51 @@ div.small-avatar {
   color: black;
   display: flex;
   margin-right: 10px;
+}
+
+.post-page {
+  margin: 0 auto;
+  margin-top: 100px;
+  width: 75%;
+}
+
+.post-content {
+  border-bottom: 1px solid lightgrey;
+  padding-bottom: 20px;
+}
+
+.post-content h2 {
+  border: 1px solid lightgrey;
+  padding: 20px;
+}
+
+.post-content .owner {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+}
+
+.post-content .owner span {
+  margin-left: 10px;
+}
+
+.post-content .owner div.owner-avatar {
+  width: 30px;
+  height: 30px;
+}
+
+.post-content > p {
+  border-top: 1px solid lightgrey;
+  padding-top: 20px;
+}
+
+.post-content img {
+  margin-top: 20px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 400px;
+  max-width: 700px;
+  max-height: 500px;
 }
