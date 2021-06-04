@@ -2,22 +2,33 @@ import './App.css';
 import {Route, Switch, useHistory} from 'react-router-dom';
 import Navbar from './Navbar.js';
 import {TextField} from '@material-ui/core';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import Post from './Post.js';
 import PostList from './PostList.js';
 import FullPost from './FullPost.js';
 import NotRoute from './NotRoute.js';
 import Signup from './Signup.js';
 import Login from './Login.js';
+import {auth} from './firebase.js';
 
 function App() {
   const [query, setQuery] = useState("");
+  const [user, setUser] = useState(null);
   const history = useHistory();
 
   const search = (e) => {
     e.preventDefault();
     history.push(`/search/${query}`);
   }
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user);
+    })
+
+    unsubscribe();
+  }, []);
+
 
   const postList = [
     {
@@ -61,6 +72,12 @@ function App() {
     }
   ]
 
+  const createAccount = (email, password, displayName, firstName, lastName) => {
+    auth.createUserWithEmailAndPassword(email, password);
+    const user = auth.currentUser;
+    user.updateProfile({displayName, firstName, lastName, photoURL: "http://genslerzudansdentistry.com/wp-content/uploads/2015/11/anonymous-user.png"});
+  }
+
   return (
     <>
       <form className="search" onSubmit={search}>
@@ -79,7 +96,7 @@ function App() {
               <PostList posts={postList} type="follow" />
             </Route>
             <Route exact path="/signup">
-              <Signup />
+              <Signup login={createAccount} />
             </Route>
             <Route exact path="/login">
               <Login />
