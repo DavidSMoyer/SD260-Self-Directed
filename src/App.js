@@ -23,7 +23,12 @@ function App() {
       content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea earum at explicabo, voluptatem itaque iste sunt eum nesciunt, atque quam quod qui aliquid consequatur optio ut velit architecto voluptate sed.",
       likes: 200,
       comments: [{}, {}, {}, {}, {}, {}],
-      id: "12345"
+      id: "12345",
+      owner: {
+        name: "TestUser",
+        img: "",
+        id: "placeholder"
+      }
     },
     {
       title: "Post Title 2",
@@ -31,7 +36,12 @@ function App() {
       content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea earum at explicabo, voluptatem itaque iste sunt eum nesciunt, atque quam quod qui aliquid consequatur optio ut velit architecto voluptate sed.",
       likes: 200,
       comments: [{}, {}, {}, {}, {}, {}],
-      id: "12345"
+      id: "12345",
+      owner: {
+        name: "TestUser",
+        img: "",
+        id: "placeholder"
+      }
     },
     {
       title: "Post Title 3",
@@ -39,7 +49,12 @@ function App() {
       content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea earum at explicabo, voluptatem itaque iste sunt eum nesciunt, atque quam quod qui aliquid consequatur optio ut velit architecto voluptate sed.",
       likes: 200,
       comments: [{}, {}, {}, {}, {}, {}],
-      id: "12345"
+      id: "12345",
+      owner: {
+        name: "TestUser",
+        img: "",
+        id: "placeholder"
+      }
     }
   ]
 
@@ -49,23 +64,25 @@ function App() {
         <TextField value={query} onChange={(e) => setQuery(e.target.value)} variant="outlined" className="search-field" />
       </form>
       <div className="layout-grid">
-        <Navbar />
-        {<Switch>
-          <Route exact path="/">
-            <PostList posts={postList} type="main" />
-          </Route>
-          <Route exact path="/follow-timeline">
-            <PostList posts={postList} type="follow" />
-          </Route>
-          <Route exact path="/signup"></Route>
-          <Route exact path="/login"></Route>
-          <Route exact path="/create"></Route>
-          <Route path="/post/:postId">
-            <FullPost />
-          </Route>
-          <Route path="/account/:accountId"></Route>
-          <Route path="/search/:query"></Route>
-        </Switch>}
+      <Navbar />
+        <div className="scroll-container">
+          {<Switch>
+            <Route exact path="/">
+              <PostList posts={postList} type="main" />
+            </Route>
+            <Route exact path="/follow-timeline">
+              <PostList posts={postList} type="follow" />
+            </Route>
+            <Route exact path="/signup"></Route>
+            <Route exact path="/login"></Route>
+            <Route exact path="/create"></Route>
+            <Route path="/post/:postId">
+              <FullPost />
+            </Route>
+            <Route path="/account/:accountId"></Route>
+            <Route path="/search/:query"></Route>
+          </Switch>}
+        </div>
       </div>
     </>
   );

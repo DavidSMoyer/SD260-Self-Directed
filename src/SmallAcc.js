@@ -1,11 +1,11 @@
 import { Avatar } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
-function SmallAcc({name, img}) {
+function SmallAcc({owner}) {
   return (
     <Link to={`/user/${"placeholder"}`}>
-      <p>{name}</p>
-      <Avatar className="small-avatar" src={img} >{img === "" && name[0].toUpperCase()}</Avatar>
+      <p>{owner.name}</p>
+      <Avatar className="small-avatar" src={owner.img} >{owner.img === "" && owner.name[0].toUpperCase()}</Avatar>
     </Link>
   )
 }

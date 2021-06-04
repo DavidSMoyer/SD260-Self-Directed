@@ -28,7 +28,7 @@ function Post({post}) {
             <ChatBubbleOutlineIcon />
             {post.comments.length}
           </span>
-          <SmallAcc name="TestUser" img="" />
+          <SmallAcc owner={post.owner} />
         </div>
         <p>{post.content}</p>
       </div>

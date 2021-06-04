@@ -5,12 +5,18 @@
   height: 100vh;
 }
 
+.scroll-container {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+}
+
 nav {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  height: 100vh;
   width: 100%;
 }
 
@@ -30,6 +36,7 @@ nav {
   transform: translate(-50%, 0%);
   width: 100%;
   text-align: center;
+  z-index: 10;
 }
 
 .search-field {
@@ -118,6 +125,7 @@ div.small-avatar {
   margin: 0 auto;
   margin-top: 100px;
   width: 75%;
+  padding-bottom: 100px;
 }
 
 .post-content {
@@ -135,6 +143,7 @@ div.small-avatar {
   align-items: center;
   text-decoration: none;
   color: black;
+  width: 150px;
 }
 
 .post-content .owner span {
@@ -159,4 +168,31 @@ div.small-avatar {
   min-width: 400px;
   max-width: 700px;
   max-height: 500px;
+}
+
+.comment,
+.reply {
+  margin-left: 25px;
+  display: inline-block;
+}
+
+.comment a,
+.reply a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  border-bottom: 1px solid lightgrey;
+  width: 100px;
+}
+
+.comment .message,
+.reply .message {
+  margin-top: 10px;
+  margin-left: 20px;
+  display: inline-block;
+}
+
+.comment + ul {
+  margin-bottom: 30px;
 }
