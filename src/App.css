@@ -1,38 +1,198 @@
-.App {
-  text-align: center;
+.layout-grid {
+  display: grid;
+  grid-template-columns: 7.5% 1fr;
+  width: 100%;
+  height: 100vh;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.scroll-container {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+nav {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
 }
 
-.App-link {
-  color: #61dafb;
+.link-icon {
+  padding: 25px;
+  font-size: 10px;
+  border-radius: 50%;
+  background-color: #ffdbfd;
+  color: #d126a1;
+  margin: 15px 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.search {
+  position: fixed;
+  left: 50%;
+  top: 20px;
+  transform: translate(-50%, 0%);
+  width: 100%;
+  text-align: center;
+  z-index: 10;
+}
+
+.search-field {
+  width: 20%;
+  background-color: white;
+  border-radius: 20px;
+}
+
+.search-field:focus-within,
+.search-field:hover {
+  width: 40%;
+}
+
+.search-field fieldset {
+  border-radius: 20px;
+}
+
+.post-link {
+  display: inline-block;
+  color: black;
+  text-decoration: none;
+  height: 100px;
+}
+
+.post {
+  display: inline-block;
+  width: 275px;
+  height: auto;
+  border-radius: 10px;
+  background-color: white;
+  padding-bottom: 10px;
+  margin: 10px;
+}
+
+.post h3 {
+  margin: 2.5px 0;
+  margin-left: 5px;
+}
+
+.post img {
+  width: 100%;
+}
+
+.post p {
+  padding: 10px;
+  margin: 0;
+}
+
+.post .stats {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
+}
+
+.post .stats span {
+  margin: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-items: space-between;
+}
+
+.post-list {
+  padding-top: 100px;
+  display: flex;
+}
+
+div.small-avatar {
+  font-size: 15px;
+  width: 25px;
+  height: 25px;
+  margin-left: 10px;
+}
+
+.stats a p {
+  padding: 0;
+}
+
+.stats a {
+  text-decoration: none;
+  color: black;
+  display: flex;
+  margin-right: 10px;
+}
+
+.post-page {
+  margin: 0 auto;
+  margin-top: 100px;
+  width: 75%;
+  padding-bottom: 100px;
+}
+
+.post-content {
+  border-bottom: 1px solid lightgrey;
+  padding-bottom: 20px;
+}
+
+.post-content h2 {
+  border: 1px solid lightgrey;
+  padding: 20px;
+}
+
+.post-content .owner {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  width: 150px;
+}
+
+.post-content .owner span {
+  margin-left: 10px;
+}
+
+.post-content .owner div.owner-avatar {
+  width: 30px;
+  height: 30px;
+}
+
+.post-content > p {
+  border-top: 1px solid lightgrey;
+  padding-top: 20px;
+}
+
+.post-content img {
+  margin-top: 20px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 400px;
+  max-width: 700px;
+  max-height: 500px;
+}
+
+.comment,
+.reply {
+  margin-left: 25px;
+  display: inline-block;
+}
+
+.comment a,
+.reply a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  border-bottom: 1px solid lightgrey;
+  width: 100px;
+}
+
+.comment .message,
+.reply .message {
+  margin-top: 10px;
+  margin-left: 20px;
+  display: inline-block;
+}
+
+.comment + ul {
+  margin-bottom: 30px;
 }
