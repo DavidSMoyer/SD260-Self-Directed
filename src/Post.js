@@ -1,6 +1,7 @@
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import { Link } from 'react-router-dom';
+import SmallAcc from './SmallAcc';
 
 function Post({post}) {
 
@@ -27,9 +28,7 @@ function Post({post}) {
             <ChatBubbleOutlineIcon />
             {post.comments.length}
           </span>
-          <span>
-            User Account
-          </span>
+          <SmallAcc name="TestUser" img="" />
         </div>
         <p>{post.content}</p>
       </div>

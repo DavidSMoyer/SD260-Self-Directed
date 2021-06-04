@@ -95,3 +95,21 @@ nav {
   padding-top: 100px;
   display: flex;
 }
+
+div.small-avatar {
+  font-size: 15px;
+  width: 25px;
+  height: 25px;
+  margin-left: 10px;
+}
+
+.stats a p {
+  padding: 0;
+}
+
+.stats a {
+  text-decoration: none;
+  color: black;
+  display: flex;
+  margin-right: 10px;
+}
