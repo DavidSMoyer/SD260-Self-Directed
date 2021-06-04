@@ -6,6 +6,9 @@ import {useState} from 'react';
 import Post from './Post.js';
 import PostList from './PostList.js';
 import FullPost from './FullPost.js';
+import NotRoute from './NotRoute.js';
+import Signup from './Signup.js';
+import Login from './Login.js';
 
 function App() {
   const [query, setQuery] = useState("");
@@ -64,7 +67,9 @@ function App() {
         <TextField value={query} onChange={(e) => setQuery(e.target.value)} variant="outlined" className="search-field" />
       </form>
       <div className="layout-grid">
-      <Navbar />
+      <NotRoute path={["/login","/signup"]} replace="true">
+        <Navbar />
+      </NotRoute>
         <div className="scroll-container">
           {<Switch>
             <Route exact path="/">
@@ -73,8 +78,12 @@ function App() {
             <Route exact path="/follow-timeline">
               <PostList posts={postList} type="follow" />
             </Route>
-            <Route exact path="/signup"></Route>
-            <Route exact path="/login"></Route>
+            <Route exact path="/signup">
+              <Signup />
+            </Route>
+            <Route exact path="/login">
+              <Login />
+            </Route>
             <Route exact path="/create"></Route>
             <Route path="/post/:postId">
               <FullPost />
