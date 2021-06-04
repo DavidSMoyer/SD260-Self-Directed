@@ -1,5 +1,6 @@
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
+import { Link } from 'react-router-dom';
 
 function Post({post}) {
 
@@ -9,27 +10,30 @@ function Post({post}) {
   // Content
   // Likes
   // Comments
+  // ID
 
 
   return (
-    <div className="post">
-      <h3>{post.title}</h3>
-      {post.imageURL !== undefined && <img src={post.imageURL}/>}
-      <div className="stats">
-        <span>
-          <FavoriteBorderIcon />
-          {post.likes}
-        </span>
-        <span>
-          <ChatBubbleOutlineIcon />
-          {post.comments.length}
-        </span>
-        <span>
-          User Account
-        </span>
+    <Link to={`/post/${post.id}`}>
+      <div className="post">
+        <h3>{post.title}</h3>
+        {post.imageURL !== undefined && <img src={post.imageURL}/>}
+        <div className="stats">
+          <span>
+            <FavoriteBorderIcon />
+            {post.likes}
+          </span>
+          <span>
+            <ChatBubbleOutlineIcon />
+            {post.comments.length}
+          </span>
+          <span>
+            User Account
+          </span>
+        </div>
+        <p>{post.content}</p>
       </div>
-      <p>{post.content}</p>
-    </div>
+    </Link>
   )
 }
 

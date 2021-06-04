@@ -19,7 +19,8 @@ function App() {
     imageURL: "https://tse3.mm.bing.net/th?id=OIP.mDzIoaqnw_whAiaTSz4iwgHaFj&pid=Api&P=0&w=214&h=161",
     content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea earum at explicabo, voluptatem itaque iste sunt eum nesciunt, atque quam quod qui aliquid consequatur optio ut velit architecto voluptate sed.",
     likes: 200,
-    comments: [{}, {}, {}, {}, {}, {}]
+    comments: [{}, {}, {}, {}, {}, {}],
+    id: "12345"
   }
 
   return (
