@@ -40,7 +40,9 @@ function CreatePost({user}) {
       body: JSON.stringify(post)
     });
     if (!submit.ok) {
-      console.log(submit);
+      alert("Something went wrong.");
+    } else {
+      history.push("/");
     }
   }
 
