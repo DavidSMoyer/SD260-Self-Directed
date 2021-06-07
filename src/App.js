@@ -84,7 +84,7 @@ function App() {
               <Signup login={setUser} />
             </Route>
             <Route exact path="/login">
-              <Login />
+              <Login login={setUser} />
             </Route>
             <Route exact path="/create"></Route>
             <Route path="/post/:postId">

@@ -10,26 +10,6 @@
       "liked": [],
       "password": "$2a$10$2KJrfJFYIBPlajl3GIMRg.aLQBs5JffRAeCGo4EAtJAGO.txItk.W",
       "id": 1
-    },
-    {
-      "fname": "David",
-      "lname": "Moyer",
-      "username": "SoftRainbowBoi",
-      "email": "poinky_m@hotmail.com",
-      "following": [],
-      "liked": [],
-      "password": "$2a$10$tcQXh9hwTRUoJYexaIdGKuOiySLiMoMF.5xtsL7VshwFw8Y7l9YfK",
-      "id": 2
-    },
-    {
-      "fname": "David",
-      "lname": "Moyer",
-      "username": "SoftRainbowBoi",
-      "email": "poinky_m@hotmail.com",
-      "following": [],
-      "liked": [],
-      "password": "$2a$10$5aESbu1mI7S9Ac7Gx7a.hec3vUK7siAZ7IZKKxV1Ddq3QlLKEYhTa",
-      "id": 3
     }
   ]
 }
