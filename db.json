@@ -5,7 +5,14 @@
       "imageURL": "https://tse3.mm.bing.net/th?id=OIP.mDzIoaqnw_whAiaTSz4iwgHaFj&pid=Api&P=0&w=214&h=161",
       "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea earum at explicabo, voluptatem itaque iste sunt eum nesciunt, atque quam quod qui aliquid consequatur optio ut velit architecto voluptate sed.",
       "likes": 200,
-      "comments": [{}, {}, {}, {}, {}, {}],
+      "comments": [
+        {},
+        {},
+        {},
+        {},
+        {},
+        {}
+      ],
       "id": "12345",
       "owner": {
         "name": "TestUser",
@@ -18,7 +25,14 @@
       "imageURL": "https://tse3.mm.bing.net/th?id=OIP.mDzIoaqnw_whAiaTSz4iwgHaFj&pid=Api&P=0&w=214&h=161",
       "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea earum at explicabo, voluptatem itaque iste sunt eum nesciunt, atque quam quod qui aliquid consequatur optio ut velit architecto voluptate sed.",
       "likes": 200,
-      "comments": [{}, {}, {}, {}, {}, {}],
+      "comments": [
+        {},
+        {},
+        {},
+        {},
+        {},
+        {}
+      ],
       "id": "12345",
       "owner": {
         "name": "TestUser",
@@ -31,13 +45,68 @@
       "imageURL": "https://tse3.mm.bing.net/th?id=OIP.mDzIoaqnw_whAiaTSz4iwgHaFj&pid=Api&P=0&w=214&h=161",
       "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea earum at explicabo, voluptatem itaque iste sunt eum nesciunt, atque quam quod qui aliquid consequatur optio ut velit architecto voluptate sed.",
       "likes": 200,
-      "comments": [{}, {}, {}, {}, {}, {}],
+      "comments": [
+        {},
+        {},
+        {},
+        {},
+        {},
+        {}
+      ],
       "id": "12345",
       "owner": {
         "name": "TestUser",
         "img": "",
         "id": "placeholder"
       }
+    },
+    {
+      "title": "Test Post",
+      "imageURL": "https://www.henryford.com/-/media/henry-ford-blog/images/interior-banner-images/2019/11/test-anxiety.jpg",
+      "content": "This is a test post. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "likes": 0,
+      "comments": [],
+      "owner": {
+        "name": "SoftRainbowBoi",
+        "id": 1
+      },
+      "id": "VGh2JWe"
+    },
+    {
+      "title": "Test Post",
+      "imageURL": "https://www.henryford.com/-/media/henry-ford-blog/images/interior-banner-images/2019/11/test-anxiety.jpg",
+      "content": "This is a test post. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "likes": 0,
+      "comments": [],
+      "owner": {
+        "name": "SoftRainbowBoi",
+        "id": 1
+      },
+      "id": "N_R_j5x"
+    },
+    {
+      "title": "Test Post",
+      "imageURL": "https://www.henryford.com/-/media/henry-ford-blog/images/interior-banner-images/2019/11/test-anxiety.jpg",
+      "content": "This is a test post. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "likes": 0,
+      "comments": [],
+      "owner": {
+        "name": "SoftRainbowBoi",
+        "id": 1
+      },
+      "id": "ByQjXm1"
+    },
+    {
+      "title": "Test Post",
+      "imageURL": "https://www.henryford.com/-/media/henry-ford-blog/images/interior-banner-images/2019/11/test-anxiety.jpg",
+      "content": "This is a test post. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "likes": 0,
+      "comments": [],
+      "owner": {
+        "name": "SoftRainbowBoi",
+        "id": 1
+      },
+      "id": "xsE6WSx"
     }
   ],
   "users": [
@@ -49,7 +118,8 @@
       "following": [],
       "liked": [],
       "password": "$2a$10$2KJrfJFYIBPlajl3GIMRg.aLQBs5JffRAeCGo4EAtJAGO.txItk.W",
-      "id": 1
+      "id": 1,
+      "imageURL": ""
     }
   ]
 }

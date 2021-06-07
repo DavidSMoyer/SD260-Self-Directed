@@ -1,13 +1,14 @@
 import {TextField} from '@material-ui/core';
 import {useState} from 'react';
+import {useHistory} from 'react-router-dom';
 
-function CreatePost() {
+function CreatePost({user}) {
   const [title, setTitle] = useState("");
   const [img, setImg] = useState("");
   const [content, setContent] = useState("");
+  const history = useHistory();
 
   const update = (e, func, max = 99999) => {
-    console.log(e.target.value.length);
     if (e.target.value.length < max) {
       func(e.target.value);
     } else {
@@ -15,8 +16,36 @@ function CreatePost() {
     }
   }
 
+  const submit = async (e) => {
+    e.preventDefault();
+
+    const post = {
+      title,
+      imageURL: img,
+      content,
+      likes: 0,
+      comments: [],
+      owner: {
+        name: user.username,
+        img: user.imageURL,
+        id: user.id
+      }
+    }
+
+    const submit = await fetch("http://localhost:5000/posts", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json;charset=UTF-8"
+      },
+      body: JSON.stringify(post)
+    });
+    if (!submit.ok) {
+      console.log(submit);
+    }
+  }
+
   return (
-    <form className="post-form">
+    <form className="post-form" onSubmit={submit}>
       <TextField value={title} fullWidth label="Post Title" required onChange={(e) => update(e, setTitle, 120)} />
       <TextField value={img} fullWidth label="Post Image URL" onChange={(e) => update(e, setImg)} />
       <TextField value={content} fullWidth multiline rows={10} label="Post Content" required className="content-input" variant="filled" onChange={(e) => update(e, setContent, 1000)} />

@@ -84,7 +84,7 @@ function App() {
             </Route>
             <Route exact path="/create">
               {user === null && <Redirect to="/login" />}
-              <CreatePost />
+              <CreatePost user={user} />
             </Route>
             <Route path="/post/:postId">
               {user === null && <Redirect to="/login" />}
