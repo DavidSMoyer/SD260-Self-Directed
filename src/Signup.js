@@ -1,4 +1,5 @@
 import {TextField, InputAdornment} from '@material-ui/core';
+import {Alert, AlertTitle} from '@material-ui/lab';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import {Link} from 'react-router-dom';
 import {useState} from 'react';
@@ -15,14 +16,34 @@ function Signup({login}) {
   const signIn = async (e) => {
     e.preventDefault();
     const errorList = [];
-    if (password !== confirm) {
-
+    if (password.length < 6) errorList.push("Password length must be six or more characters.");
+    if (password !== confirm) errorList.push("Passwords do not match.");
+    if (errorList.length > 0) {
+      setErrors(errorList);
+      return;
+    }
+    const duplicateEmail = await fetch(`http://localhost:5000/users?email=${email}`).then(response => response.json());
+    if (duplicateEmail > 0) {
+      console.log(duplicateEmail.length > 0);
+      setErrors(["That account is already in use."]);
+      return;
     }
   }
 
   return (
     <form class="account-form" onSubmit={signIn}>
       <h1>Sign Up</h1>
+      {
+        errors.length > 0 &&
+        <Alert severity="error" className="form-alert">
+          <AlertTitle>Error</AlertTitle>
+          <ul>
+            {
+              errors.map(error => <li>{error}</li>)
+            }
+          </ul>
+        </Alert>
+      }
       <span>
         <TextField required label="First Name" onChange={(e) => setFname(e.target.value)} />
         <TextField required label="Last Name" onChange={(e) => setLname(e.target.value)}/>

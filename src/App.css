@@ -229,3 +229,7 @@ div.small-avatar {
 .account-form > p {
   font-size: 13px;
 }
+
+div.form-alert {
+  background-color: rgb(253, 194, 194);
+}
