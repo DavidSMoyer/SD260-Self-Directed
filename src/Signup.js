@@ -49,6 +49,8 @@ function Signup({login}) {
     if (uploadUser.ok) {
       const userResponse = await uploadUser.json();
       login(userResponse);
+      const expire = Date.now() + (24 * 60 * 60 * 1000 * 7);
+      localStorage.setItem("auto-login", JSON.stringify({expire, user: userResponse}));
     } else {
       setErrors(["Something went wrong."]);
     }

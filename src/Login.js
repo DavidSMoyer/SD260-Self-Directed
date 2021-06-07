@@ -19,6 +19,9 @@ function Login({login}) {
     if ((searchByName && compare(password, searchByName.password)) || (searchByEmail && compare(password, searchByEmail.password))) {
       const user = searchByName ? searchByName : searchByEmail;
       login(user);
+      const expire = Date.now() + (24 * 60 * 60 * 1000 * 7);
+      localStorage.setItem("auto-login", JSON.stringify({expire, user}));
+      return;
     }
     setError("That username and password combination does not exist.");
   }

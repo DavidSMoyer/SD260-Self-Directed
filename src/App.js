@@ -20,6 +20,19 @@ function App() {
     history.push(`/search/${query}`);
   }
 
+  useEffect(() => {
+    const oldUser = JSON.parse(localStorage.getItem("auto-login"));
+    if (oldUser !== null) {
+      if (oldUser.expire > Date.now()) {
+        oldUser.expire = Date.now() + (24 * 60 * 60 * 1000 * 7);
+        setUser(oldUser.user);
+        localStorage.setItem("auto-login", JSON.stringify(oldUser));
+      } else {
+        localStorage.removeItem("auto-login");
+      }
+    }
+  }, []);
+
 
   const postList = [
     {
