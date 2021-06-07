@@ -1,6 +1,6 @@
-import {TextField, InputAdornment, Button} from '@material-ui/core';
+import {TextField, InputAdornment} from '@material-ui/core';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import {useState} from 'react';
 import {compare} from 'bcryptjs';
 import {Alert, AlertTitle} from '@material-ui/lab';
@@ -9,6 +9,7 @@ function Login({login}) {
   const [error, setError] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
 
   const submit = async (e) => {
     e.preventDefault();
@@ -21,6 +22,7 @@ function Login({login}) {
       login(user);
       const expire = Date.now() + (24 * 60 * 60 * 1000 * 7);
       localStorage.setItem("auto-login", JSON.stringify({expire, user}));
+      history.push("/");
       return;
     }
     setError("That username and password combination does not exist.");

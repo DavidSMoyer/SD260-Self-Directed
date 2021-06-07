@@ -1,7 +1,7 @@
 import {TextField, InputAdornment} from '@material-ui/core';
 import {Alert, AlertTitle} from '@material-ui/lab';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import {useState} from 'react';
 import {hashSync} from 'bcryptjs';
 
@@ -13,6 +13,7 @@ function Signup({login}) {
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [errors, setErrors] = useState([]);
+  const history = useHistory();
 
   const signIn = async (e) => {
     e.preventDefault();
@@ -51,6 +52,7 @@ function Signup({login}) {
       login(userResponse);
       const expire = Date.now() + (24 * 60 * 60 * 1000 * 7);
       localStorage.setItem("auto-login", JSON.stringify({expire, user: userResponse}));
+      history.push("/");
     } else {
       setErrors(["Something went wrong."]);
     }

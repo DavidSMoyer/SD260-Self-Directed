@@ -233,3 +233,23 @@ div.small-avatar {
 div.form-alert {
   background-color: rgb(253, 194, 194);
 }
+
+button.logout {
+  position: absolute;
+  left: 95%;
+  top: 5%;
+  width: 60px;
+  height: 60px;
+  background-color: #ffdbfd;
+  color: #d126a1;
+  z-index: 10;
+  transform: translate(-50%, -50%);
+}
+
+button.logout:hover {
+  background-color: #eecfec;
+}
+
+.logout .MuiSvgIcon-root {
+  font-size: 30px;
+}

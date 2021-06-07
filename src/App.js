@@ -1,7 +1,8 @@
 import './App.css';
 import {Route, Switch, useHistory} from 'react-router-dom';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Navbar from './Navbar.js';
-import {TextField} from '@material-ui/core';
+import {TextField, IconButton} from '@material-ui/core';
 import {useState, useEffect} from 'react';
 import Post from './Post.js';
 import PostList from './PostList.js';
@@ -32,6 +33,12 @@ function App() {
       }
     }
   }, []);
+
+  const logout = (e) => {
+    setUser(null);
+    localStorage.removeItem('auto-login');
+    history.push("/login");
+  }
 
 
   const postList = [
@@ -81,6 +88,9 @@ function App() {
       <form className="search" onSubmit={search}>
         <TextField value={query} onChange={(e) => setQuery(e.target.value)} variant="outlined" className="search-field" />
       </form>
+      <IconButton color="primary" className="logout" onClick={logout}>
+        <ExitToAppIcon />
+      </IconButton>
       <div className="layout-grid">
       <NotRoute path={["/login","/signup"]} replace="true">
         <Navbar />
