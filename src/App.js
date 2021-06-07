@@ -10,6 +10,7 @@ import FullPost from './FullPost.js';
 import NotRoute from './NotRoute.js';
 import Signup from './Signup.js';
 import Login from './Login.js';
+import CreatePost from './CreatePost.js';
 
 function App() {
   const [query, setQuery] = useState("");
@@ -83,6 +84,7 @@ function App() {
             </Route>
             <Route exact path="/create">
               {user === null && <Redirect to="/login" />}
+              <CreatePost />
             </Route>
             <Route path="/post/:postId">
               {user === null && <Redirect to="/login" />}
