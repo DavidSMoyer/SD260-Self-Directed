@@ -196,3 +196,60 @@ div.small-avatar {
 .comment + ul {
   margin-bottom: 30px;
 }
+
+.account-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+  width: 92.5%
+}
+
+.account-form > div {
+  width: 40%;
+  margin: 20px 0;
+}
+
+.account-form > span {
+  display: inline-block;
+  width: 40%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.account-form > input {
+  all: unset;
+  cursor: pointer;
+}
+
+.account-form > input:hover {
+  transform: scale(1.1, 1.1);
+}
+
+.account-form > p {
+  font-size: 13px;
+}
+
+div.form-alert {
+  background-color: rgb(253, 194, 194);
+}
+
+button.logout {
+  position: absolute;
+  left: 95%;
+  top: 5%;
+  width: 60px;
+  height: 60px;
+  background-color: #ffdbfd;
+  color: #d126a1;
+  z-index: 10;
+  transform: translate(-50%, -50%);
+}
+
+button.logout:hover {
+  background-color: #eecfec;
+}
+
+.logout .MuiSvgIcon-root {
+  font-size: 30px;
+}

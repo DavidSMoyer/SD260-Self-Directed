@@ -1,20 +1,45 @@
 import './App.css';
 import {Route, Switch, useHistory} from 'react-router-dom';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Navbar from './Navbar.js';
-import {TextField} from '@material-ui/core';
-import {useState} from 'react';
+import {TextField, IconButton} from '@material-ui/core';
+import {useState, useEffect} from 'react';
 import Post from './Post.js';
 import PostList from './PostList.js';
 import FullPost from './FullPost.js';
+import NotRoute from './NotRoute.js';
+import Signup from './Signup.js';
+import Login from './Login.js';
 
 function App() {
   const [query, setQuery] = useState("");
+  const [user, setUser] = useState(null);
   const history = useHistory();
 
   const search = (e) => {
     e.preventDefault();
     history.push(`/search/${query}`);
   }
+
+  useEffect(() => {
+    const oldUser = JSON.parse(localStorage.getItem("auto-login"));
+    if (oldUser !== null) {
+      if (oldUser.expire > Date.now()) {
+        oldUser.expire = Date.now() + (24 * 60 * 60 * 1000 * 7);
+        setUser(oldUser.user);
+        localStorage.setItem("auto-login", JSON.stringify(oldUser));
+      } else {
+        localStorage.removeItem("auto-login");
+      }
+    }
+  }, []);
+
+  const logout = (e) => {
+    setUser(null);
+    localStorage.removeItem('auto-login');
+    history.push("/login");
+  }
+
 
   const postList = [
     {
@@ -56,15 +81,20 @@ function App() {
         id: "placeholder"
       }
     }
-  ]
+  ];
 
   return (
     <>
       <form className="search" onSubmit={search}>
         <TextField value={query} onChange={(e) => setQuery(e.target.value)} variant="outlined" className="search-field" />
       </form>
+      <IconButton color="primary" className="logout" onClick={logout}>
+        <ExitToAppIcon />
+      </IconButton>
       <div className="layout-grid">
-      <Navbar />
+      <NotRoute path={["/login","/signup"]} replace="true">
+        <Navbar />
+      </NotRoute>
         <div className="scroll-container">
           {<Switch>
             <Route exact path="/">
@@ -73,8 +103,12 @@ function App() {
             <Route exact path="/follow-timeline">
               <PostList posts={postList} type="follow" />
             </Route>
-            <Route exact path="/signup"></Route>
-            <Route exact path="/login"></Route>
+            <Route exact path="/signup">
+              <Signup login={setUser} />
+            </Route>
+            <Route exact path="/login">
+              <Login login={setUser} />
+            </Route>
             <Route exact path="/create"></Route>
             <Route path="/post/:postId">
               <FullPost />
