@@ -1,4 +1,4 @@
-import {TextField, InputAdornment, Button} from '@material-ui/core';
+import {TextField, InputAdornment} from '@material-ui/core';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import {Link} from 'react-router-dom';
 import {useState} from 'react';
@@ -9,10 +9,15 @@ function Signup({login}) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
+  const [errors, setErrors] = useState([]);
 
-  const signIn = (e) => {
+  const signIn = async (e) => {
     e.preventDefault();
-    login(email, password);
+    const errorList = [];
+    if (password !== confirm) {
+
+    }
   }
 
   return (
@@ -31,6 +36,16 @@ function Signup({login}) {
           <InputAdornment position="end"><VisibilityOffIcon /></InputAdornment>
         )}}
         onChange={(e) => setPassword(e.target.value)}
+        type="password"
+      />
+      <TextField 
+        required
+        label="Confirm Password"
+        InputProps={{endAdornment: (
+          <InputAdornment position="end"><VisibilityOffIcon /></InputAdornment>
+        )}}
+        onChange={(e) => setConfirm(e.target.value)}
+        type="password"
       />
       <input type="submit" value="Submit" />
       <p>Already have an account? <Link to="/login">Login.</Link></p>

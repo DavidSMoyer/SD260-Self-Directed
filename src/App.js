@@ -9,7 +9,6 @@ import FullPost from './FullPost.js';
 import NotRoute from './NotRoute.js';
 import Signup from './Signup.js';
 import Login from './Login.js';
-import {auth} from './firebase.js';
 
 function App() {
   const [query, setQuery] = useState("");
@@ -20,14 +19,6 @@ function App() {
     e.preventDefault();
     history.push(`/search/${query}`);
   }
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setUser(user);
-    })
-
-    unsubscribe();
-  }, []);
 
 
   const postList = [
@@ -70,13 +61,7 @@ function App() {
         id: "placeholder"
       }
     }
-  ]
-
-  const createAccount = (email, password, displayName, firstName, lastName) => {
-    auth.createUserWithEmailAndPassword(email, password);
-    const user = auth.currentUser;
-    user.updateProfile({displayName, firstName, lastName, photoURL: "http://genslerzudansdentistry.com/wp-content/uploads/2015/11/anonymous-user.png"});
-  }
+  ];
 
   return (
     <>
@@ -96,7 +81,7 @@ function App() {
               <PostList posts={postList} type="follow" />
             </Route>
             <Route exact path="/signup">
-              <Signup login={createAccount} />
+              <Signup login={setUser} />
             </Route>
             <Route exact path="/login">
               <Login />

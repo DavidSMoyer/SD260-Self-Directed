@@ -3,6 +3,11 @@ import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import {Link} from 'react-router-dom';
 
 function Login() {
+
+  const login = (e) => {
+    
+  }
+
   return (
     <form class="account-form" onSubmit={(e) => {e.preventDefault(); alert("test")}}>
       <h1>Login</h1>
