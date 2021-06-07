@@ -10,10 +10,12 @@ import FullPost from './FullPost.js';
 import NotRoute from './NotRoute.js';
 import Signup from './Signup.js';
 import Login from './Login.js';
+import CreatePost from './CreatePost.js';
 
 function App() {
   const [query, setQuery] = useState("");
   const [user, setUser] = useState(null);
+  const [posts, setPosts] = useState([]);
   const history = useHistory();
 
   const search = (e) => {
@@ -31,6 +33,11 @@ function App() {
       } else {
         localStorage.removeItem("auto-login");
       }
+
+      (async () => {
+        const postReq = await fetch("http://localhost:5000/posts").then(response => response.json());
+        setPosts(postReq);
+      })();
     }
   }, []);
 
@@ -39,49 +46,6 @@ function App() {
     localStorage.removeItem('auto-login');
     history.push("/login");
   }
-
-
-  const postList = [
-    {
-      title: "Post Title",
-      imageURL: "https://tse3.mm.bing.net/th?id=OIP.mDzIoaqnw_whAiaTSz4iwgHaFj&pid=Api&P=0&w=214&h=161",
-      content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea earum at explicabo, voluptatem itaque iste sunt eum nesciunt, atque quam quod qui aliquid consequatur optio ut velit architecto voluptate sed.",
-      likes: 200,
-      comments: [{}, {}, {}, {}, {}, {}],
-      id: "12345",
-      owner: {
-        name: "TestUser",
-        img: "",
-        id: "placeholder"
-      }
-    },
-    {
-      title: "Post Title 2",
-      imageURL: "https://tse3.mm.bing.net/th?id=OIP.mDzIoaqnw_whAiaTSz4iwgHaFj&pid=Api&P=0&w=214&h=161",
-      content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea earum at explicabo, voluptatem itaque iste sunt eum nesciunt, atque quam quod qui aliquid consequatur optio ut velit architecto voluptate sed.",
-      likes: 200,
-      comments: [{}, {}, {}, {}, {}, {}],
-      id: "12345",
-      owner: {
-        name: "TestUser",
-        img: "",
-        id: "placeholder"
-      }
-    },
-    {
-      title: "Post Title 3",
-      imageURL: "https://tse3.mm.bing.net/th?id=OIP.mDzIoaqnw_whAiaTSz4iwgHaFj&pid=Api&P=0&w=214&h=161",
-      content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea earum at explicabo, voluptatem itaque iste sunt eum nesciunt, atque quam quod qui aliquid consequatur optio ut velit architecto voluptate sed.",
-      likes: 200,
-      comments: [{}, {}, {}, {}, {}, {}],
-      id: "12345",
-      owner: {
-        name: "TestUser",
-        img: "",
-        id: "placeholder"
-      }
-    }
-  ];
 
   return (
     <>
@@ -104,11 +68,11 @@ function App() {
           {<Switch>
             <Route exact path="/">
               {user === null && <Redirect to="/login" />}
-              <PostList posts={postList} type="main" />
+              <PostList posts={posts} type="main" />
             </Route>
             <Route exact path="/follow-timeline">
               {user === null && <Redirect to="/login" />}
-              <PostList posts={postList} type="follow" />
+              <PostList posts={posts} type="follow" />
             </Route>
             <Route exact path="/signup">
               {user !== null && <Redirect to="/login" />}
@@ -120,6 +84,7 @@ function App() {
             </Route>
             <Route exact path="/create">
               {user === null && <Redirect to="/login" />}
+              <CreatePost user={user} />
             </Route>
             <Route path="/post/:postId">
               {user === null && <Redirect to="/login" />}
