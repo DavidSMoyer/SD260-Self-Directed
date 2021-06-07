@@ -3,6 +3,7 @@ import {Alert, AlertTitle} from '@material-ui/lab';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import {Link} from 'react-router-dom';
 import {useState} from 'react';
+import {hashSync} from 'bcryptjs';
 
 function Signup({login}) {
   const [fname, setFname] = useState("");
@@ -23,10 +24,33 @@ function Signup({login}) {
       return;
     }
     const duplicateEmail = await fetch(`http://localhost:5000/users?email=${email}`).then(response => response.json());
-    if (duplicateEmail > 0) {
-      console.log(duplicateEmail.length > 0);
+    if (duplicateEmail.length > 0) {
       setErrors(["That account is already in use."]);
       return;
+    }
+
+    const passHash = hashSync(password, 10);
+    const user = {
+      fname,
+      lname,
+      username,
+      email,
+      following: [],
+      liked: [],
+      password: passHash
+    }
+    const uploadUser = await fetch('http://localhost:5000/users', {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json;charset=UTF-8"
+      },
+      body: JSON.stringify(user)
+    });
+    if (uploadUser.ok) {
+      const userResponse = await uploadUser.json();
+      login(userResponse);
+    } else {
+      setErrors(["Something went wrong."]);
     }
   }
 
