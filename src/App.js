@@ -14,6 +14,7 @@ import Login from './Login.js';
 function App() {
   const [query, setQuery] = useState("");
   const [user, setUser] = useState(null);
+  const [posts, setPosts] = useState([]);
   const history = useHistory();
 
   const search = (e) => {
@@ -40,49 +41,6 @@ function App() {
     history.push("/login");
   }
 
-
-  const postList = [
-    {
-      title: "Post Title",
-      imageURL: "https://tse3.mm.bing.net/th?id=OIP.mDzIoaqnw_whAiaTSz4iwgHaFj&pid=Api&P=0&w=214&h=161",
-      content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea earum at explicabo, voluptatem itaque iste sunt eum nesciunt, atque quam quod qui aliquid consequatur optio ut velit architecto voluptate sed.",
-      likes: 200,
-      comments: [{}, {}, {}, {}, {}, {}],
-      id: "12345",
-      owner: {
-        name: "TestUser",
-        img: "",
-        id: "placeholder"
-      }
-    },
-    {
-      title: "Post Title 2",
-      imageURL: "https://tse3.mm.bing.net/th?id=OIP.mDzIoaqnw_whAiaTSz4iwgHaFj&pid=Api&P=0&w=214&h=161",
-      content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea earum at explicabo, voluptatem itaque iste sunt eum nesciunt, atque quam quod qui aliquid consequatur optio ut velit architecto voluptate sed.",
-      likes: 200,
-      comments: [{}, {}, {}, {}, {}, {}],
-      id: "12345",
-      owner: {
-        name: "TestUser",
-        img: "",
-        id: "placeholder"
-      }
-    },
-    {
-      title: "Post Title 3",
-      imageURL: "https://tse3.mm.bing.net/th?id=OIP.mDzIoaqnw_whAiaTSz4iwgHaFj&pid=Api&P=0&w=214&h=161",
-      content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea earum at explicabo, voluptatem itaque iste sunt eum nesciunt, atque quam quod qui aliquid consequatur optio ut velit architecto voluptate sed.",
-      likes: 200,
-      comments: [{}, {}, {}, {}, {}, {}],
-      id: "12345",
-      owner: {
-        name: "TestUser",
-        img: "",
-        id: "placeholder"
-      }
-    }
-  ];
-
   return (
     <>
       <NotRoute path={["/login","/signup"]}>
@@ -104,11 +62,11 @@ function App() {
           {<Switch>
             <Route exact path="/">
               {user === null && <Redirect to="/login" />}
-              <PostList posts={postList} type="main" />
+              <PostList posts={posts} type="main" />
             </Route>
             <Route exact path="/follow-timeline">
               {user === null && <Redirect to="/login" />}
-              <PostList posts={postList} type="follow" />
+              <PostList posts={posts} type="follow" />
             </Route>
             <Route exact path="/signup">
               {user !== null && <Redirect to="/login" />}

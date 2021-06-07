@@ -1,5 +1,45 @@
 {
-  "posts": [],
+  "posts": [
+    {
+      "title": "Post Title",
+      "imageURL": "https://tse3.mm.bing.net/th?id=OIP.mDzIoaqnw_whAiaTSz4iwgHaFj&pid=Api&P=0&w=214&h=161",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea earum at explicabo, voluptatem itaque iste sunt eum nesciunt, atque quam quod qui aliquid consequatur optio ut velit architecto voluptate sed.",
+      "likes": 200,
+      "comments": [{}, {}, {}, {}, {}, {}],
+      "id": "12345",
+      "owner": {
+        "name": "TestUser",
+        "img": "",
+        "id": "placeholder"
+      }
+    },
+    {
+      "title": "Post Title 2",
+      "imageURL": "https://tse3.mm.bing.net/th?id=OIP.mDzIoaqnw_whAiaTSz4iwgHaFj&pid=Api&P=0&w=214&h=161",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea earum at explicabo, voluptatem itaque iste sunt eum nesciunt, atque quam quod qui aliquid consequatur optio ut velit architecto voluptate sed.",
+      "likes": 200,
+      "comments": [{}, {}, {}, {}, {}, {}],
+      "id": "12345",
+      "owner": {
+        "name": "TestUser",
+        "img": "",
+        "id": "placeholder"
+      }
+    },
+    {
+      "title": "Post Title 3",
+      "imageURL": "https://tse3.mm.bing.net/th?id=OIP.mDzIoaqnw_whAiaTSz4iwgHaFj&pid=Api&P=0&w=214&h=161",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea earum at explicabo, voluptatem itaque iste sunt eum nesciunt, atque quam quod qui aliquid consequatur optio ut velit architecto voluptate sed.",
+      "likes": 200,
+      "comments": [{}, {}, {}, {}, {}, {}],
+      "id": "12345",
+      "owner": {
+        "name": "TestUser",
+        "img": "",
+        "id": "placeholder"
+      }
+    }
+  ],
   "users": [
     {
       "fname": "David",
