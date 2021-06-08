@@ -15,7 +15,6 @@ import User from './User.js';
 function App() {
   const [query, setQuery] = useState("");
   const [user, setUser] = useState(null);
-  const [posts, setPosts] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const history = useHistory();
 
@@ -34,11 +33,6 @@ function App() {
       } else {
         localStorage.removeItem("auto-login");
       }
-
-      (async () => {
-        const postReq = await fetch("http://localhost:5000/posts").then(response => response.json());
-        setPosts(postReq);
-      })();
     }
     setLoaded(true);
   }, []);
@@ -73,11 +67,11 @@ function App() {
               {<Switch>
                 <Route exact path="/">
                   {user === null && <Redirect to="/login" />}
-                  <PostList posts={posts} type="main" user={user} />
+                  <PostList type="main" user={user} />
                 </Route>
                 <Route exact path="/follow-timeline">
                   {user === null && <Redirect to="/login" />}
-                  <PostList posts={posts} type="follow" user={user} />
+                  <PostList type="follow" user={user} />
                 </Route>
                 <Route exact path="/signup">
                   {user !== null && <Redirect to="/" />}
