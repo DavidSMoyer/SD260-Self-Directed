@@ -4,7 +4,6 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Navbar from './Navbar.js';
 import {TextField, IconButton} from '@material-ui/core';
 import {useState, useEffect} from 'react';
-import Post from './Post.js';
 import PostList from './PostList.js';
 import FullPost from './FullPost.js';
 import NotRoute from './NotRoute.js';
@@ -16,6 +15,7 @@ function App() {
   const [query, setQuery] = useState("");
   const [user, setUser] = useState(null);
   const [posts, setPosts] = useState([]);
+  const [loaded, setLoaded] = useState(false);
   const history = useHistory();
 
   const search = (e) => {
@@ -39,6 +39,7 @@ function App() {
         setPosts(postReq);
       })();
     }
+    setLoaded(true);
   }, []);
 
   const logout = (e) => {
@@ -49,56 +50,61 @@ function App() {
 
   return (
     <>
-      <NotRoute path={["/login","/signup"]}>
-        <form className="search" onSubmit={search}>
-          <TextField value={query} onChange={(e) => setQuery(e.target.value)} variant="outlined" className="search-field" />
-        </form>
-      </NotRoute>
       {
-        user !== null &&
-        <IconButton color="primary" className="logout" onClick={logout}>
-          <ExitToAppIcon />
-        </IconButton>
+        loaded &&
+        <>
+          <NotRoute path={["/login","/signup"]}>
+            <form className="search" onSubmit={search}>
+              <TextField value={query} onChange={(e) => setQuery(e.target.value)} variant="outlined" className="search-field" />
+            </form>
+          </NotRoute>
+          {
+            user !== null &&
+            <IconButton color="primary" className="logout" onClick={logout}>
+              <ExitToAppIcon />
+            </IconButton>
+          }
+          <div className="layout-grid">
+            <NotRoute path={["/login","/signup"]} replace="true">
+              <Navbar />
+            </NotRoute>
+            <div className="scroll-container">
+              {<Switch>
+                <Route exact path="/">
+                  {user === null && <Redirect to="/login" />}
+                  <PostList posts={posts} type="main" />
+                </Route>
+                <Route exact path="/follow-timeline">
+                  {user === null && <Redirect to="/login" />}
+                  <PostList posts={posts} type="follow" />
+                </Route>
+                <Route exact path="/signup">
+                  {user !== null && <Redirect to="/" />}
+                  <Signup login={setUser} />
+                </Route>
+                <Route exact path="/login">
+                  {user !== null && <Redirect to="/" />}
+                  <Login login={setUser} />
+                </Route>
+                <Route exact path="/create">
+                  {user === null && <Redirect to="/login" />}
+                  <CreatePost user={user} />
+                </Route>
+                <Route path="/post/:postId">
+                  {user === null && <Redirect to="/login" />}
+                  <FullPost />
+                </Route>
+                <Route path="/account/:accountId">
+                  {user === null && <Redirect to="/login" />}
+                </Route>
+                <Route path="/search/:query">
+                  {user === null && <Redirect to="/login" />}
+                </Route>
+              </Switch>}
+            </div>
+          </div>
+        </>
       }
-      <div className="layout-grid">
-        <NotRoute path={["/login","/signup"]} replace="true">
-          <Navbar />
-        </NotRoute>
-        <div className="scroll-container">
-          {<Switch>
-            <Route exact path="/">
-              {user === null && <Redirect to="/login" />}
-              <PostList posts={posts} type="main" />
-            </Route>
-            <Route exact path="/follow-timeline">
-              {user === null && <Redirect to="/login" />}
-              <PostList posts={posts} type="follow" />
-            </Route>
-            <Route exact path="/signup">
-              {user !== null && <Redirect to="/login" />}
-              <Signup login={setUser} />
-            </Route>
-            <Route exact path="/login">
-              {user !== null && <Redirect to="/login" />}
-              <Login login={setUser} />
-            </Route>
-            <Route exact path="/create">
-              {user === null && <Redirect to="/login" />}
-              <CreatePost user={user} />
-            </Route>
-            <Route path="/post/:postId">
-              {user === null && <Redirect to="/login" />}
-              <FullPost />
-            </Route>
-            <Route path="/account/:accountId">
-              {user === null && <Redirect to="/login" />}
-            </Route>
-            <Route path="/search/:query">
-              {user === null && <Redirect to="/login" />}
-            </Route>
-          </Switch>}
-        </div>
-      </div>
     </>
   );
 }
