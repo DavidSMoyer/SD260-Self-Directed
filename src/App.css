@@ -311,3 +311,8 @@ button.logout:hover {
 .account .stats span {
   font-variant: small-caps;
 }
+
+.account-page .post-list {
+  padding-top: 0;
+  margin-top: 20px;
+}

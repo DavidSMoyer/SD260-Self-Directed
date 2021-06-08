@@ -79,6 +79,19 @@
       },
       "private": true,
       "id": "RYqmm0O"
+    },
+    {
+      "title": "New Post",
+      "imageURL": "",
+      "content": "lol quirky",
+      "likes": 0,
+      "comments": [],
+      "owner": {
+        "name": "TestUser",
+        "id": 2
+      },
+      "private": false,
+      "id": "ARYaouR"
     }
   ],
   "users": [
