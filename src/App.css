@@ -163,7 +163,7 @@ div.small-avatar {
   padding-top: 20px;
 }
 
-.post-content img {
+.post-content > img {
   margin-top: 20px;
   position: relative;
   left: 50%;
