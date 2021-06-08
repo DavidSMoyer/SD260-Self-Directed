@@ -20,15 +20,17 @@ function User({user}) {
         account !== undefined &&
         <div className="account-page">
           <div className="account">
-            <Avatar src={account.imageURL}>{account.imageURL === "" && account.username[0].toUpperCase()}</Avatar>
-            <span className="username">{account.username}</span>
+            <div className="account-details">
+              <Avatar src={account.imageURL}>{account.imageURL === "" && account.username[0].toUpperCase()}</Avatar>
+              <span className="username">{account.username}</span>
+            </div>
+            <div className="stats">
+              <span className="followers">{0} Followers</span>
+              <span className="following">{0} Following</span>
+              <span className="karma">{0} Karma</span>
+            </div>
+            {account.id !== user.id && <Button variant="contained">{user.following.includes(account.id) ? "UNFOLLOW" : "FOLLOW"}</Button>}
           </div>
-          <div className="stats">
-            <span className="followers">{0} Followers</span>
-            <span className="followers">{0} Following</span>
-            <span className="followers">{0} Karma</span>
-          </div>
-          {account.id !== user.id && <Button variant="contained">{user.following.includes(account.id) ? "UNFOLLOW" : "FOLLOW"}</Button>}
           <PostList type="owned" user={user} account={account} />
         </div>
       }
