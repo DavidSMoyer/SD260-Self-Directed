@@ -274,3 +274,45 @@ button.logout:hover {
 .post-form > div {
   margin-bottom: 20px;
 }
+
+.account {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+  align-items: center;
+  flex-direction: column;
+}
+
+.account-details {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  flex-direction: column;
+}
+
+.account-details span {
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.account-details .MuiAvatar-root {
+  width: 100px;
+  height: 100px;
+}
+
+.account .stats {
+  display: flex;
+  justify-content: space-between;
+  width: 25%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.account .stats span {
+  font-variant: small-caps;
+}
+
+.account-page .post-list {
+  padding-top: 0;
+  margin-top: 20px;
+}
