@@ -12,7 +12,7 @@ function User({user}) {
       const accountReq = await fetch(`http://localhost:5000/users/${accountId}`).then(response => response.json());
       setAccount(accountReq);
     })();
-  }, [])
+  }, [accountId])
 
   return (
     <>
