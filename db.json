@@ -111,7 +111,9 @@
       "lname": "User",
       "username": "TestUser",
       "email": "test@test.com",
-      "following": [],
+      "following": [
+        1
+      ],
       "liked": [],
       "password": "$2a$10$36a9iPdrDXcVpqwU.szWnuHNklAfnvYzCs69o7gkj4xKih2HRlY2S",
       "id": 2
