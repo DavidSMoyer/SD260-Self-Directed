@@ -10,6 +10,7 @@ import NotRoute from './NotRoute.js';
 import Signup from './Signup.js';
 import Login from './Login.js';
 import CreatePost from './CreatePost.js';
+import User from './User.js';
 
 function App() {
   const [query, setQuery] = useState("");
@@ -66,7 +67,7 @@ function App() {
           }
           <div className="layout-grid">
             <NotRoute path={["/login","/signup"]} replace="true">
-              <Navbar />
+              <Navbar user={user} />
             </NotRoute>
             <div className="scroll-container">
               {<Switch>
@@ -96,6 +97,7 @@ function App() {
                 </Route>
                 <Route path="/account/:accountId">
                   {user === null && <Redirect to="/login" />}
+                  <User user={user} />
                 </Route>
                 <Route path="/search/:query">
                   {user === null && <Redirect to="/login" />}

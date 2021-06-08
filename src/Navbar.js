@@ -6,11 +6,10 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import {Badge} from '@material-ui/core';
 import {Link} from 'react-router-dom';
 
-function Navbar() {
+function Navbar({user}) {
   return (
     <nav>
-      {/* Add user's own id */}
-      <Link to="/account/user-id" className="link-icon"><PersonIcon style={{"fontSize": 35}} /></Link>
+      <Link to={`/account/${user.id}`} className="link-icon"><PersonIcon style={{"fontSize": 35}} /></Link>
       <Link to="/follow-timeline" className="link-icon"><EmojiPeopleIcon style={{"fontSize": 35}} /></Link>
       <Link to="/create" className="link-icon"><AddIcon style={{"fontSize": 45}} /></Link>
       <Link to="/" className="link-icon"><HomeIcon style={{"fontSize": 35}} /></Link>
