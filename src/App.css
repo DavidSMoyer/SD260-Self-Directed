@@ -226,6 +226,11 @@ div.small-avatar {
   cursor: pointer;
 }
 
+.post-form > input,
+.post-form > .MuiFormControlLabel-root {
+  margin: 25px 200px;
+}
+
 .account-form > input:hover,
 .post-form > input:hover {
   transform: scale(1.1, 1.1);
