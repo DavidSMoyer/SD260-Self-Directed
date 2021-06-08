@@ -163,7 +163,7 @@ div.small-avatar {
   padding-top: 20px;
 }
 
-.post-content img {
+.post-content > img {
   margin-top: 20px;
   position: relative;
   left: 50%;
@@ -224,6 +224,11 @@ div.small-avatar {
 .post-form > input {
   all: unset;
   cursor: pointer;
+}
+
+.post-form > input,
+.post-form > .MuiFormControlLabel-root {
+  margin: 25px 200px;
 }
 
 .account-form > input:hover,

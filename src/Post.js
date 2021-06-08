@@ -4,16 +4,6 @@ import { Link } from 'react-router-dom';
 import SmallAcc from './SmallAcc';
 
 function Post({post}) {
-
-  // Post:
-  // Title
-  // ImageURL
-  // Content
-  // Likes
-  // Comments
-  // ID
-
-
   return (
     <Link to={`/post/${post.id}`} className="post-link">
       <div className="post">
