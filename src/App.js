@@ -95,7 +95,7 @@ function App() {
                   {user === null && <Redirect to="/login" />}
                   <FullPost />
                 </Route>
-                <Route path="/account/:accountId">
+                <Route path="/user/:accountId">
                   {user === null && <Redirect to="/login" />}
                   <User user={user} />
                 </Route>

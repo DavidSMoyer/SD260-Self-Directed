@@ -13,7 +13,7 @@ function SmallAcc({owner}) {
   })
 
   return (
-    <Link to={`/user/${"placeholder"}`}>
+    <Link to={`/user/${owner.id}`}>
       <p>{owner.name}</p>
       <Avatar className="small-avatar" src={img} >{img === "" && owner.name[0].toUpperCase()}</Avatar>
     </Link>

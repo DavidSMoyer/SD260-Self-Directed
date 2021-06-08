@@ -9,7 +9,7 @@ import {Link} from 'react-router-dom';
 function Navbar({user}) {
   return (
     <nav>
-      <Link to={`/account/${user.id}`} className="link-icon"><PersonIcon style={{"fontSize": 35}} /></Link>
+      <Link to={`/user/${user.id}`} className="link-icon"><PersonIcon style={{"fontSize": 35}} /></Link>
       <Link to="/follow-timeline" className="link-icon"><EmojiPeopleIcon style={{"fontSize": 35}} /></Link>
       <Link to="/create" className="link-icon"><AddIcon style={{"fontSize": 45}} /></Link>
       <Link to="/" className="link-icon"><HomeIcon style={{"fontSize": 35}} /></Link>
