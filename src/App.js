@@ -91,7 +91,7 @@ function App() {
                 </Route>
                 <Route path="/user/:accountId">
                   {user === null && <Redirect to="/login" />}
-                  <User user={user} />
+                  <User user={user} setUser={setUser} />
                 </Route>
                 <Route path="/search/:query">
                   {user === null && <Redirect to="/login" />}
