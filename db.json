@@ -10,7 +10,8 @@
         "name": "SoftRainbowBoi",
         "id": 1
       },
-      "id": "VGh2JWe"
+      "id": "VGh2JWe",
+      "private": false
     },
     {
       "title": "Test Post",
@@ -22,7 +23,8 @@
         "name": "SoftRainbowBoi",
         "id": 1
       },
-      "id": "N_R_j5x"
+      "id": "N_R_j5x",
+      "private": false
     },
     {
       "title": "Test Post",
@@ -34,7 +36,8 @@
         "name": "SoftRainbowBoi",
         "id": 1
       },
-      "id": "ByQjXm1"
+      "id": "ByQjXm1",
+      "private": false
     },
     {
       "title": "Test Post",
@@ -46,7 +49,8 @@
         "name": "SoftRainbowBoi",
         "id": 1
       },
-      "id": "xsE6WSx"
+      "id": "xsE6WSx",
+      "private": false
     },
     {
       "title": "Test post 2",
@@ -59,7 +63,22 @@
         "img": "",
         "id": 1
       },
-      "id": "vL1NloC"
+      "id": "vL1NloC",
+      "private": false
+    },
+    {
+      "title": "Private Post",
+      "imageURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Lock_font_awesome.svg/1200px-Lock_font_awesome.svg.png",
+      "content": "Only people i'm following can see this :)",
+      "likes": 0,
+      "comments": [],
+      "owner": {
+        "name": "SoftRainbowBoi",
+        "img": "https://www.californiafallcolor.com/wp-content/uploads/2016/10/JS-Conway-Summit-1.jpg",
+        "id": 1
+      },
+      "private": true,
+      "id": "RYqmm0O"
     }
   ],
   "users": [
@@ -73,6 +92,16 @@
       "password": "$2a$10$2KJrfJFYIBPlajl3GIMRg.aLQBs5JffRAeCGo4EAtJAGO.txItk.W",
       "id": 1,
       "imageURL": "https://www.californiafallcolor.com/wp-content/uploads/2016/10/JS-Conway-Summit-1.jpg"
+    },
+    {
+      "fname": "Test",
+      "lname": "User",
+      "username": "TestUser",
+      "email": "test@test.com",
+      "following": [],
+      "liked": [],
+      "password": "$2a$10$36a9iPdrDXcVpqwU.szWnuHNklAfnvYzCs69o7gkj4xKih2HRlY2S",
+      "id": 2
     }
   ]
 }

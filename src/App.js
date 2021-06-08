@@ -72,11 +72,11 @@ function App() {
               {<Switch>
                 <Route exact path="/">
                   {user === null && <Redirect to="/login" />}
-                  <PostList posts={posts} type="main" />
+                  <PostList posts={posts} type="main" user={user} />
                 </Route>
                 <Route exact path="/follow-timeline">
                   {user === null && <Redirect to="/login" />}
-                  <PostList posts={posts} type="follow" />
+                  <PostList posts={posts} type="follow" user={user} />
                 </Route>
                 <Route exact path="/signup">
                   {user !== null && <Redirect to="/" />}
