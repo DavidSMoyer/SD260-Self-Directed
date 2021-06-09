@@ -6,13 +6,22 @@ function PostList({type, user, account}) {
 
   useEffect(() => {
     (async () => {
-      const posts = await fetch("http://localhost:5000/posts").then(response => response.json());
+      let posts = await fetch("http://localhost:5000/posts").then(response => response.json());
       if (type === "main") {
-        setPostList(posts.filter(post => post.owner.id !== user.id));
+        posts = posts.filter(post => post.owner.id !== user.id);
       } else if (type === "follow") {
-        setPostList(posts.filter(post => user.following.includes(post.owner.id)));
+        posts = posts.filter(post => user.following.includes(post.owner.id));
       } else if (type === "owned") {
-        setPostList(posts.filter(post => post.owner.id === account.id));
+        posts = posts.filter(post => post.owner.id === account.id);
+      }
+
+      if (type !== "owned" || account.id !== user.id) {
+        const postCheck = posts.map(post => fetch(`http://localhost:5000/users/${post.owner.id}`));
+        const owners = await Promise.all(postCheck).
+          then(responses => Promise.all(responses.map(response => response.json())));
+        setPostList(posts.filter((post, idx) => !post.private || owners[idx].following.includes(user.id)));
+      } else {
+        setPostList(posts);
       }
     })();
   }, [account, type])
