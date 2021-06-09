@@ -116,7 +116,8 @@
       ],
       "liked": [],
       "password": "$2a$10$36a9iPdrDXcVpqwU.szWnuHNklAfnvYzCs69o7gkj4xKih2HRlY2S",
-      "id": 2
+      "id": 2,
+      "test-val": 20
     }
   ]
 }

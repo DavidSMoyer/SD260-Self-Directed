@@ -26,14 +26,18 @@ function User({user, setUser}) {
 
   useEffect(() => {
     (async () => {
-      const req = await fetch(`http://localhost:5000/users/${user.id}`, {
+      const expire = JSON.parse(localStorage.getItem("auto-login")).expire;
+      localStorage.setItem("auto-login", JSON.stringify({user, expire}));
+      const patchReq = await fetch("http://localhost:5000/users/2",
+      {
         method: "PATCH",
         headers: {
-          "Content-type": "application/json;charset=UTF-8"
+          "Content-type": "application/json; charset=UTF-8"
         },
         body: JSON.stringify({following: user.following})
       });
-      console.log(req);
+      const response = await patchReq.json();
+      console.log(response);
     })();
   }, [user]);
 
