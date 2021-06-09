@@ -55,6 +55,7 @@ function FullPost({user, setUser}) {
   }
 
   const toggleLiked = () => {
+    if (post.owner.id === user.id) return;
     if (user.liked.includes(post.id)) {
       setUser({...user, liked: user.liked.filter(likedId => likedId !== post.id)});
       setLikes(likes - 1);
@@ -92,7 +93,7 @@ function FullPost({user, setUser}) {
             <p>{post.content}</p>
             <form className="actions" onSubmit={submitComment}>
               <span>
-                {user.liked.includes(post.id) ? <FavoriteIcon onClick={toggleLiked} className="like-icon" /> : <FavoriteBorderIcon onClick={toggleLiked} className="like-icon" />}
+                {user.liked.includes(post.id) || post.owner.id === user.id ? <FavoriteIcon onClick={toggleLiked} className="like-icon" /> : <FavoriteBorderIcon onClick={toggleLiked} className="like-icon" />}
                 {likes}
               </span>
               <span>
