@@ -161,6 +161,16 @@
       "liked": [],
       "password": "$2a$10$LS2bot5a8a54WZFGo7YsxehT.Ar0L71ntzniGAzaEinB1YXaTK2Ou",
       "id": 3
+    },
+    {
+      "fname": "Test",
+      "lname": "User",
+      "username": "TestUser3",
+      "email": "test@test3.com",
+      "following": [],
+      "liked": [],
+      "password": "$2a$10$jGSM2KjxvVx6yybLFrTlo.i6FpV0RHME6L6sYhMg0dEQ194NmJlYC",
+      "id": 4
     }
   ]
 }

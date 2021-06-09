@@ -1,11 +1,11 @@
 import {Avatar} from '@material-ui/core';
-import {Link, useParams} from 'react-router-dom';
+import {Link, useParams, Redirect} from 'react-router-dom';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import Comment from './Comment.js';
 import {useState, useEffect} from 'react';
 
-function FullPost() {
+function FullPost({user}) {
   const [post, setPost] = useState(undefined);
   const [owner, setOwner] = useState(undefined);
   const { postId } = useParams();
@@ -24,6 +24,7 @@ function FullPost() {
       {  
         (post !== undefined && owner !== undefined )&&
         <div className="post-page">
+          {(!owner.following.includes(user.id) && post.private) && <Redirect to="/" />}
           <div className="post-content">
             <h2>{post.title}</h2>
             <Link className="owner" to={`/user/${post.owner.id}`}>
