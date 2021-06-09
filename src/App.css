@@ -192,6 +192,15 @@ div.small-avatar {
   margin-left: 20px;
 }
 
+.comments {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment {
+  margin-bottom: 10px;
+}
+
 .comment,
 .reply {
   margin-left: 25px;

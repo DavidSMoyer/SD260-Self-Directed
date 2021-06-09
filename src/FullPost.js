@@ -52,6 +52,7 @@ function FullPost({user, setUser}) {
   const submitComment = (e) => {
     e.preventDefault();
     setPost({...post, comments: [...post.comments, {message: commentInput, owner: {id: user.id, name: user.username}, replies: []}]});
+    setCommentInput("");
   }
 
   const toggleLiked = () => {
