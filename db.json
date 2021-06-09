@@ -92,6 +92,19 @@
       },
       "private": false,
       "id": "ARYaouR"
+    },
+    {
+      "title": "Testing Testing 123",
+      "imageURL": "https://tse2.mm.bing.net/th?id=OIP.X-_J_MRIE4sCIv9eJg6y6QHaDt&pid=Api&P=0&w=408&h=205",
+      "content": "Oopsie daisie looks like a did a testy",
+      "likes": 0,
+      "comments": [],
+      "owner": {
+        "name": "TestUser2",
+        "id": 3
+      },
+      "private": false,
+      "id": "VWM84eN"
     }
   ],
   "users": [
@@ -111,13 +124,21 @@
       "lname": "User",
       "username": "TestUser",
       "email": "test@test.com",
-      "following": [
-        1
-      ],
+      "following": [],
       "liked": [],
       "password": "$2a$10$36a9iPdrDXcVpqwU.szWnuHNklAfnvYzCs69o7gkj4xKih2HRlY2S",
       "id": 2,
       "test-val": 20
+    },
+    {
+      "fname": "Test",
+      "lname": "User",
+      "username": "TestUser2",
+      "email": "test@test2.com",
+      "following": [],
+      "liked": [],
+      "password": "$2a$10$LS2bot5a8a54WZFGo7YsxehT.Ar0L71ntzniGAzaEinB1YXaTK2Ou",
+      "id": 3
     }
   ]
 }

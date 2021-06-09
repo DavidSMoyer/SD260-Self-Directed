@@ -15,7 +15,7 @@ function PostList({type, user, account}) {
         setPostList(posts.filter(post => post.owner.id === account.id));
       }
     })();
-  }, [account])
+  }, [account, type])
 
   return (
     <div className="post-list">
