@@ -174,6 +174,24 @@ div.small-avatar {
   max-height: 500px;
 }
 
+.post-content .actions {
+  display: flex;
+  align-items: center;
+}
+
+.post-content .actions > span {
+  margin-right: 50px;
+}
+
+.post-content .actions div.comment-input {
+  width: 70%;
+}
+
+.post-content .actions > input {
+  all: unset;
+  margin-left: 20px;
+}
+
 .comment,
 .reply {
   margin-left: 25px;

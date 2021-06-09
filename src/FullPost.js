@@ -1,4 +1,4 @@
-import {Avatar} from '@material-ui/core';
+import {Avatar, TextField} from '@material-ui/core';
 import {Link, useParams, Redirect} from 'react-router-dom';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
@@ -8,6 +8,7 @@ import {useState, useEffect} from 'react';
 function FullPost({user}) {
   const [post, setPost] = useState(undefined);
   const [owner, setOwner] = useState(undefined);
+  const [commentInput, setCommentInput] = useState("");
   const { postId } = useParams();
 
   useEffect(() => {
@@ -18,6 +19,18 @@ function FullPost({user}) {
       setOwner(ownerReq);
     })()
   }, [])
+
+  const updateComment = (e) => {
+    if (e.target.value.length > 100) {
+      setCommentInput(e.target.value.substr(0, 100));
+    } else {
+      setCommentInput(e.target.value);
+    }
+  }
+
+  const submitComment = (e) => {
+    e.preventDefault();
+  }
 
   return (
     <>
@@ -33,7 +46,7 @@ function FullPost({user}) {
             </Link>
             {post.imageURl !== "" && <img src={post.imageURL} />}
             <p>{post.content}</p>
-            <div className="stats">
+            <form className="actions">
               <span>
                 <FavoriteBorderIcon />
                 {post.likes}
@@ -42,7 +55,9 @@ function FullPost({user}) {
                 <ChatBubbleOutlineIcon />
                 {post.comments.length}
               </span>
-            </div>
+              <TextField placeholder="Comment" required className="comment-input" onChange={updateComment} value={commentInput} />
+              <input type="submit" value="Submit" />
+            </form>
           </div>
           <div className="comments">
             {post.comments.map(comment => (
