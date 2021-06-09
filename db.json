@@ -168,7 +168,14 @@
       "username": "TestUser3",
       "email": "test@test3.com",
       "following": [],
-      "liked": [],
+      "liked": [
+        "VGh2JWe",
+        "N_R_j5x",
+        "ByQjXm1",
+        "ARYaouR",
+        "vL1NloC",
+        "xsE6WSx"
+      ],
       "password": "$2a$10$jGSM2KjxvVx6yybLFrTlo.i6FpV0RHME6L6sYhMg0dEQ194NmJlYC",
       "id": 4
     }

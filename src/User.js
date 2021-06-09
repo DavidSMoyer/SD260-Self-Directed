@@ -58,7 +58,7 @@ function User({user, setUser}) {
             </div>
             {account.id !== user.id && <Button variant="contained" onClick={toggleFollow}>{user.following.includes(account.id) ? "UNFOLLOW" : "FOLLOW"}</Button>}
           </div>
-          <PostList type="owned" user={user} account={account} />
+          <PostList type="owned" user={user} account={account} setUser={setUser} />
         </div>
       }
     </>

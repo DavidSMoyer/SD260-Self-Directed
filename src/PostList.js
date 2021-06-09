@@ -1,7 +1,7 @@
 import Post from './Post.js';
 import {useEffect, useState} from 'react';
 
-function PostList({type, user, account}) {
+function PostList({type, user, account, setUser}) {
   const [postList, setPostList] = useState([]);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ function PostList({type, user, account}) {
   return (
     <div className="post-list">
       {postList.map((post, idx) => (
-        <Post key={idx} post={post} />
+        <Post key={idx} post={post} user={user} setUser={setUser} />
       ))}
     </div>
   )
