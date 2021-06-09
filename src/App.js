@@ -87,7 +87,7 @@ function App() {
                 </Route>
                 <Route path="/post/:postId">
                   {user === null && <Redirect to="/login" />}
-                  <FullPost user={user} />
+                  <FullPost user={user} setUser={setUser} />
                 </Route>
                 <Route path="/user/:accountId">
                   {user === null && <Redirect to="/login" />}

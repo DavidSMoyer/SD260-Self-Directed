@@ -1,13 +1,17 @@
 import {Avatar, TextField} from '@material-ui/core';
 import {Link, useParams, Redirect} from 'react-router-dom';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import Comment from './Comment.js';
 import {useState, useEffect} from 'react';
+import { SettingsInputSvideoRounded } from '@material-ui/icons';
 
-function FullPost({user}) {
+function FullPost({user, setUser}) {
   const [post, setPost] = useState(undefined);
+  const [likes, setLikes] = useState(0);
   const [owner, setOwner] = useState(undefined);
+  const [loaded, setLoaded] = useState(false);
   const [commentInput, setCommentInput] = useState("");
   const { postId } = useParams();
 
@@ -17,8 +21,17 @@ function FullPost({user}) {
       setPost(postReq);
       const ownerReq = await fetch(`http://localhost:5000/users/${postReq.owner.id}`).then(response => response.json());
       setOwner(ownerReq);
+      setLoaded(true);
     })()
   }, [])
+
+  useEffect(() => {
+    if (post === undefined) return;
+    (async () => {
+      const users = await fetch(`http://localhost:5000/users`).then(response => response.json());
+      setLikes(users.filter(user => user.liked.includes(post.id)).length);
+    })();
+  }, [post])
 
   const updateComment = (e) => {
     if (e.target.value.length > 100) {
@@ -32,10 +45,32 @@ function FullPost({user}) {
     e.preventDefault();
   }
 
+  const toggleLiked = () => {
+    if (user.liked.includes(post.id)) {
+      setUser({...user, liked: user.liked.filter(likedId => likedId !== post.id)});
+      setLikes(likes - 1);
+    } else {
+      setUser({...user, liked: [...user.liked, post.id]});
+      setLikes(likes + 1);
+    }
+  }
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/users/${user.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      },
+      body: JSON.stringify({liked: user.liked})
+    });
+    const expire = JSON.parse(localStorage.getItem("auto-login")).expire;
+    localStorage.setItem("auto-login", JSON.stringify({user, expire}));
+  }, [user])
+
   return (
     <>
       {  
-        (post !== undefined && owner !== undefined )&&
+        loaded &&
         <div className="post-page">
           {(!owner.following.includes(user.id) && post.private) && <Redirect to="/" />}
           <div className="post-content">
@@ -48,8 +83,8 @@ function FullPost({user}) {
             <p>{post.content}</p>
             <form className="actions">
               <span>
-                <FavoriteBorderIcon />
-                {post.likes}
+                {user.liked.includes(post.id) ? <FavoriteIcon onClick={toggleLiked} /> : <FavoriteBorderIcon onClick={toggleLiked} />}
+                {likes}
               </span>
               <span>
                 <ChatBubbleOutlineIcon />

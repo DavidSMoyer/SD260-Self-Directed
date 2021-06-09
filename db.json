@@ -130,7 +130,9 @@
         2,
         3
       ],
-      "liked": [],
+      "liked": [
+        "VWM84eN"
+      ],
       "password": "$2a$10$2KJrfJFYIBPlajl3GIMRg.aLQBs5JffRAeCGo4EAtJAGO.txItk.W",
       "id": 1,
       "imageURL": "https://www.californiafallcolor.com/wp-content/uploads/2016/10/JS-Conway-Summit-1.jpg"
