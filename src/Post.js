@@ -8,7 +8,7 @@ function Post({post}) {
     <Link to={`/post/${post.id}`} className="post-link">
       <div className="post">
         <h3>{post.title}</h3>
-        {post.imageURL !== undefined && <img src={post.imageURL}/>}
+        {post.imageURL !== "" ? <img src={post.imageURL}/> : <p>{post.content}</p>}
         <div className="stats">
           <span>
             <FavoriteBorderIcon />
@@ -20,7 +20,7 @@ function Post({post}) {
           </span>
           <SmallAcc owner={post.owner} />
         </div>
-        <p>{post.content}</p>
+        {post.imageURL !== "" && <p>{post.content}</p>}
       </div>
     </Link>
   )
