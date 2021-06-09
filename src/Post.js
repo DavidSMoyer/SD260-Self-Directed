@@ -1,7 +1,7 @@
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import SmallAcc from './SmallAcc';
 import {useState, useEffect} from 'react';
 
@@ -9,6 +9,7 @@ function Post({post, user, setUser}) {
   const [postInfo, setPostInfo] = useState(null);
   const [likes, setLikes] = useState(0);
   const [loaded, setLoaded] = useState(false);
+  const history = useHistory();
 
   const toggleLike = (e) => {
     if (post.owner.id === user.id) return;
@@ -53,11 +54,11 @@ function Post({post, user, setUser}) {
             {postInfo.imageURL !== "" ? <img src={postInfo.imageURL}/> : <p>{postInfo.content}</p>}
             <div className="stats">
               <span>
-                {user.liked.includes(postInfo.id) || postInfo.owner.id === user.id ? <FavoriteIcon onClick={toggleLike} /> : <FavoriteBorderIcon onClick={toggleLike} />}
+                {user.liked.includes(postInfo.id) || postInfo.owner.id === user.id ? <FavoriteIcon onClick={toggleLike} className="like-icon" /> : <FavoriteBorderIcon onClick={toggleLike} className="like-icon" />}
                 {likes}
               </span>
               <span>
-                <ChatBubbleOutlineIcon />
+                <ChatBubbleOutlineIcon onClick={(e) => {e.preventDefault(); history.push(`/post/${postInfo.id}#comment`)}} />
                 {postInfo.comments.length}
               </span>
               <SmallAcc owner={postInfo.owner} />

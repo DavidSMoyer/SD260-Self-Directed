@@ -92,14 +92,14 @@ function FullPost({user, setUser}) {
             <p>{post.content}</p>
             <form className="actions" onSubmit={submitComment}>
               <span>
-                {user.liked.includes(post.id) ? <FavoriteIcon onClick={toggleLiked} /> : <FavoriteBorderIcon onClick={toggleLiked} />}
+                {user.liked.includes(post.id) ? <FavoriteIcon onClick={toggleLiked} className="like-icon" /> : <FavoriteBorderIcon onClick={toggleLiked} className="like-icon" />}
                 {likes}
               </span>
               <span>
                 <ChatBubbleOutlineIcon />
                 {post.comments.length}
               </span>
-              <TextField placeholder="Comment" required className="comment-input" onChange={updateComment} value={commentInput} />
+              <TextField placeholder="Comment" required className="comment-input" onChange={updateComment} value={commentInput} id="comment" />
               <input type="submit" value="Submit" />
             </form>
           </div>
