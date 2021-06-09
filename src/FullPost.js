@@ -99,8 +99,14 @@ function FullPost({user, setUser}) {
                 <ChatBubbleOutlineIcon />
                 {post.comments.length}
               </span>
-              <TextField placeholder="Comment" required className="comment-input" onChange={updateComment} value={commentInput} id="comment" />
-              <input type="submit" value="Submit" />
+              {
+                post.owner.id !== user.id && 
+                <>
+                  <TextField placeholder="Comment" required className="comment-input" onChange={updateComment} value={commentInput} id="comment" />
+                  <input type="submit" value="Submit" />
+                </>
+              }
+              
             </form>
           </div>
           <div className="comments">
