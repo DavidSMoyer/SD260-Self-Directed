@@ -31,7 +31,15 @@ function FullPost({user, setUser}) {
       const users = await fetch(`http://localhost:5000/users`).then(response => response.json());
       setLikes(users.filter(user => user.liked.includes(post.id)).length);
     })();
-  }, [post])
+    fetch(`http://localhost:5000/posts/${post.id}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      },
+      body: JSON.stringify({comments: post.comments})
+    })
+  }, [post]);
 
   const updateComment = (e) => {
     if (e.target.value.length > 100) {
@@ -43,6 +51,7 @@ function FullPost({user, setUser}) {
 
   const submitComment = (e) => {
     e.preventDefault();
+    setPost({...post, comments: [...post.comments, {message: commentInput, owner: {id: user.id, name: user.username}, replies: []}]});
   }
 
   const toggleLiked = () => {
@@ -81,7 +90,7 @@ function FullPost({user, setUser}) {
             </Link>
             {post.imageURl !== "" && <img src={post.imageURL} />}
             <p>{post.content}</p>
-            <form className="actions">
+            <form className="actions" onSubmit={submitComment}>
               <span>
                 {user.liked.includes(post.id) ? <FavoriteIcon onClick={toggleLiked} /> : <FavoriteBorderIcon onClick={toggleLiked} />}
                 {likes}

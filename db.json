@@ -98,7 +98,16 @@
       "imageURL": "https://tse2.mm.bing.net/th?id=OIP.X-_J_MRIE4sCIv9eJg6y6QHaDt&pid=Api&P=0&w=408&h=205",
       "content": "Oopsie daisie looks like a did a testy",
       "likes": 0,
-      "comments": [],
+      "comments": [
+        {
+          "message": "test",
+          "owner": {
+            "id": 1,
+            "name": "SoftRainbowBoi"
+          },
+          "replies": []
+        }
+      ],
       "owner": {
         "name": "TestUser2",
         "id": 3
@@ -143,7 +152,7 @@
       "username": "TestUser",
       "email": "test@test.com",
       "following": [
-        1,
+        2,
         3
       ],
       "liked": [],
