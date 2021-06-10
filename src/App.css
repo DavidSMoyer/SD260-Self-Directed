@@ -348,3 +348,8 @@ button.logout:hover {
 .like-icon {
   cursor: pointer;
 }
+
+.reply-field {
+  margin-left: 25px;
+  margin-top: 5px;
+}
