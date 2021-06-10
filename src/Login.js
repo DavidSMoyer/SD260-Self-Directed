@@ -1,5 +1,6 @@
 import {TextField, InputAdornment} from '@material-ui/core';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 import {Link, useHistory} from 'react-router-dom';
 import {useState} from 'react';
 import {compare} from 'bcryptjs';
@@ -9,6 +10,7 @@ function Login({login}) {
   const [error, setError] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [passVisible, setPassVisible] = useState(false);
   const history = useHistory();
 
   const submit = async (e) => {
@@ -43,9 +45,9 @@ function Login({login}) {
         required
         label="Password"
         InputProps={{endAdornment: (
-          <InputAdornment position="end"><VisibilityOffIcon /></InputAdornment>
+          <InputAdornment position="end" onClick={() => setPassVisible(!passVisible)} className="pass-toggle">{passVisible ? <VisibilityIcon /> : <VisibilityOffIcon />}</InputAdornment>
         )}}
-        type="password"
+        type={passVisible ? "text" : "password"}
         onChange={e => setPassword(e.target.value)}
       />
       <input type="submit" value="Submit" />

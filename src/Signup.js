@@ -1,6 +1,7 @@
 import {TextField, InputAdornment} from '@material-ui/core';
 import {Alert, AlertTitle} from '@material-ui/lab';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 import {Link, useHistory} from 'react-router-dom';
 import {useState} from 'react';
 import {hashSync} from 'bcryptjs';
@@ -13,6 +14,8 @@ function Signup({login}) {
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [errors, setErrors] = useState([]);
+  const [passVisible, setPassVisible] = useState(false);
+  const [confirmVisible, setConfirmVisible] = useState(false);
   const history = useHistory();
 
   const signIn = async (e) => {
@@ -83,19 +86,19 @@ function Signup({login}) {
         required
         label="Password"
         InputProps={{endAdornment: (
-          <InputAdornment position="end"><VisibilityOffIcon /></InputAdornment>
+          <InputAdornment position="end" className="pass-toggle" onClick={() => setPassVisible(!passVisible)}>{passVisible ? <VisibilityIcon /> : <VisibilityOffIcon />}</InputAdornment>
         )}}
         onChange={(e) => setPassword(e.target.value)}
-        type="password"
+        type={passVisible ? "text" : "password"}
       />
       <TextField 
         required
         label="Confirm Password"
         InputProps={{endAdornment: (
-          <InputAdornment position="end"><VisibilityOffIcon /></InputAdornment>
+          <InputAdornment position="end" className="pass-toggle" onClick={() => setConfirmVisible(!confirmVisible)}>{confirmVisible ? <VisibilityIcon /> : <VisibilityOffIcon />}</InputAdornment>
         )}}
         onChange={(e) => setConfirm(e.target.value)}
-        type="password"
+        type={confirmVisible ? "text" : "password"}
       />
       <input type="submit" value="Submit" />
       <p>Already have an account? <Link to="/login">Login.</Link></p>
