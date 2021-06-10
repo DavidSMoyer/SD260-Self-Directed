@@ -30,6 +30,14 @@ function Login({login}) {
     setError("That username and password combination does not exist.");
   }
 
+  const update = (e, func, max) => {
+    if (e.target.value.length > max) {
+      func(e.target.value.substr(0, max));
+    } else {
+      func(e.target.value);
+    }
+  }
+
   return (
     <form className="account-form" onSubmit={submit}>
       <h1>Login</h1>
@@ -40,7 +48,7 @@ function Login({login}) {
           {error}
         </Alert>
       }
-      <TextField required label="Username" onChange={e => setName(e.target.value)} />
+      <TextField required label="Username" onChange={e => update(e, setName, 20)} value={name} />
       <TextField 
         required
         label="Password"
@@ -48,7 +56,8 @@ function Login({login}) {
           <InputAdornment position="end" onClick={() => setPassVisible(!passVisible)} className="pass-toggle">{passVisible ? <VisibilityIcon /> : <VisibilityOffIcon />}</InputAdornment>
         )}}
         type={passVisible ? "text" : "password"}
-        onChange={e => setPassword(e.target.value)}
+        onChange={e => update(e, setPassword, 50)}
+        value={password}
       />
       <input type="submit" value="Submit" />
       <p>Don't have an account? <Link to="/signup">Sign up.</Link></p>
