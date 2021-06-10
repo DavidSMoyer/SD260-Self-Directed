@@ -38,7 +38,8 @@ function Signup({login}) {
       email,
       following: [],
       liked: [],
-      password: passHash
+      password: passHash,
+      alerts: []
     }
     const uploadUser = await fetch('http://localhost:5000/users', {
       method: "POST",

@@ -362,3 +362,9 @@ button.logout:hover {
 .reply-list .reply {
   margin-bottom: 20px;
 }
+
+.alert-page {
+  margin: 0 auto;
+  margin-top: 100px;
+  width: 70%;
+}
