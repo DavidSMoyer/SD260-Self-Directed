@@ -1,5 +1,6 @@
 import {TextField, InputAdornment} from '@material-ui/core';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 import {Link, useHistory} from 'react-router-dom';
 import {useState} from 'react';
 import {compare} from 'bcryptjs';
@@ -9,6 +10,7 @@ function Login({login}) {
   const [error, setError] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [passVisible, setPassVisible] = useState(false);
   const history = useHistory();
 
   const submit = async (e) => {
@@ -28,6 +30,14 @@ function Login({login}) {
     setError("That username and password combination does not exist.");
   }
 
+  const update = (e, func, max) => {
+    if (e.target.value.length > max) {
+      func(e.target.value.substr(0, max));
+    } else {
+      func(e.target.value);
+    }
+  }
+
   return (
     <form className="account-form" onSubmit={submit}>
       <h1>Login</h1>
@@ -38,15 +48,16 @@ function Login({login}) {
           {error}
         </Alert>
       }
-      <TextField required label="Username" onChange={e => setName(e.target.value)} />
+      <TextField required label="Username" onChange={e => update(e, setName, 20)} value={name} />
       <TextField 
         required
         label="Password"
         InputProps={{endAdornment: (
-          <InputAdornment position="end"><VisibilityOffIcon /></InputAdornment>
+          <InputAdornment position="end" onClick={() => setPassVisible(!passVisible)} className="pass-toggle">{passVisible ? <VisibilityIcon /> : <VisibilityOffIcon />}</InputAdornment>
         )}}
-        type="password"
-        onChange={e => setPassword(e.target.value)}
+        type={passVisible ? "text" : "password"}
+        onChange={e => update(e, setPassword, 50)}
+        value={password}
       />
       <input type="submit" value="Submit" />
       <p>Don't have an account? <Link to="/signup">Sign up.</Link></p>
