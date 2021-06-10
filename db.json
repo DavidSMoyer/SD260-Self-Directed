@@ -1,4 +1,28 @@
 {
   "posts": [],
-  "users": []
+  "users": [
+    {
+      "fname": "David",
+      "lname": "Moyer",
+      "username": "SoftRainbowBoi",
+      "email": "poinky_m@hotmail.com",
+      "following": [],
+      "liked": [],
+      "password": "$2a$10$2KJrfJFYIBPlajl3GIMRg.aLQBs5JffRAeCGo4EAtJAGO.txItk.W",
+      "id": 1,
+      "imageURL": "https://www.californiafallcolor.com/wp-content/uploads/2016/10/JS-Conway-Summit-1.jpg",
+      "alerts": []
+    },
+    {
+      "fname": "Test",
+      "lname": "User",
+      "username": "TestUser",
+      "email": "test@test.com",
+      "following": [],
+      "liked": [],
+      "password": "$2a$10$36a9iPdrDXcVpqwU.szWnuHNklAfnvYzCs69o7gkj4xKih2HRlY2S",
+      "id": 2,
+      "alerts": []
+    }
+  ]
 }

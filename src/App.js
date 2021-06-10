@@ -11,6 +11,7 @@ import Signup from './Signup.js';
 import Login from './Login.js';
 import CreatePost from './CreatePost.js';
 import User from './User.js';
+import AlertPage from './AlertPage.js';
 
 function App() {
   const [query, setQuery] = useState("");
@@ -95,6 +96,9 @@ function App() {
                 </Route>
                 <Route path="/search/:query">
                   {user === null && <Redirect to="/login" />}
+                </Route>
+                <Route path="/alerts" exact>
+                  <AlertPage user={user} />
                 </Route>
               </Switch>}
             </div>

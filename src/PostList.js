@@ -7,6 +7,7 @@ function PostList({type, user, account, setUser}) {
   useEffect(() => {
     (async () => {
       let posts = await fetch("http://localhost:5000/posts").then(response => response.json());
+      posts.sort((post1, post2) => post2.postTime - post1.postTime);
       if (type === "main") {
         posts = posts.filter(post => post.owner.id !== user.id);
       } else if (type === "follow") {

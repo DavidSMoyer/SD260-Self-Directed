@@ -1,6 +1,7 @@
 import {TextField, InputAdornment} from '@material-ui/core';
 import {Alert, AlertTitle} from '@material-ui/lab';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 import {Link, useHistory} from 'react-router-dom';
 import {useState} from 'react';
 import {hashSync} from 'bcryptjs';
@@ -13,6 +14,8 @@ function Signup({login}) {
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [errors, setErrors] = useState([]);
+  const [passVisible, setPassVisible] = useState(false);
+  const [confirmVisible, setConfirmVisible] = useState(false);
   const history = useHistory();
 
   const signIn = async (e) => {
@@ -38,7 +41,8 @@ function Signup({login}) {
       email,
       following: [],
       liked: [],
-      password: passHash
+      password: passHash,
+      alerts: []
     }
     const uploadUser = await fetch('http://localhost:5000/users', {
       method: "POST",
@@ -58,6 +62,14 @@ function Signup({login}) {
     }
   }
 
+  const update = (e, func, max) => {
+    if (e.target.value.length > max) {
+      func(e.target.value.substr(0, max));
+    } else {
+      func(e.target.value);
+    }
+  }
+
   return (
     <form class="account-form" onSubmit={signIn}>
       <h1>Sign Up</h1>
@@ -73,28 +85,30 @@ function Signup({login}) {
         </Alert>
       }
       <span>
-        <TextField required label="First Name" onChange={(e) => setFname(e.target.value)} />
-        <TextField required label="Last Name" onChange={(e) => setLname(e.target.value)}/>
+        <TextField required label="First Name" onChange={(e) => setFname(e.target.value)} value={fname} />
+        <TextField required label="Last Name" onChange={(e) => setLname(e.target.value)} value={lname} />
       </span>
-      <TextField required label="Username" onChange={(e) => setUsername(e.target.value)}/>
-      <TextField required label="Email" onChange={(e) => setEmail(e.target.value)}/>
+      <TextField required label="Username" onChange={(e) => update(e, setUsername, 20)} value={username} />
+      <TextField required label="Email" onChange={(e) => setEmail(e.target.value)} value={email} />
       <TextField 
         required
         label="Password"
         InputProps={{endAdornment: (
-          <InputAdornment position="end"><VisibilityOffIcon /></InputAdornment>
+          <InputAdornment position="end" className="pass-toggle" onClick={() => setPassVisible(!passVisible)}>{passVisible ? <VisibilityIcon /> : <VisibilityOffIcon />}</InputAdornment>
         )}}
-        onChange={(e) => setPassword(e.target.value)}
-        type="password"
+        onChange={(e) => update(e, setPassword, 50)}
+        type={passVisible ? "text" : "password"}
+        value={password}
       />
       <TextField 
         required
         label="Confirm Password"
         InputProps={{endAdornment: (
-          <InputAdornment position="end"><VisibilityOffIcon /></InputAdornment>
+          <InputAdornment position="end" className="pass-toggle" onClick={() => setConfirmVisible(!confirmVisible)}>{confirmVisible ? <VisibilityIcon /> : <VisibilityOffIcon />}</InputAdornment>
         )}}
-        onChange={(e) => setConfirm(e.target.value)}
-        type="password"
+        onChange={(e) => update(e, setConfirm, 50)}
+        type={confirmVisible ? "text" : "password"}
+        value={confirm}
       />
       <input type="submit" value="Submit" />
       <p>Already have an account? <Link to="/login">Login.</Link></p>
