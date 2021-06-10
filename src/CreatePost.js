@@ -31,7 +31,8 @@ function CreatePost({user}) {
         img: user.imageURL,
         id: user.id
       },
-      private: postPrivate
+      private: postPrivate,
+      postTime: Date.now()
     }
 
     const submit = await fetch("http://localhost:5000/posts", {
