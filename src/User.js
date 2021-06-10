@@ -2,6 +2,7 @@ import {Avatar, Button} from '@material-ui/core';
 import {useParams, Link, useHistory} from 'react-router-dom';
 import {useState, useEffect} from 'react';
 import PostList from './PostList.js';
+import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 
 function User({user, setUser}) {
   const [account, setAccount] = useState(undefined);
@@ -55,6 +56,7 @@ function User({user, setUser}) {
               <span className="followers">{followers} Followers</span>
               <span className="following">{account.following.length} Following</span>
               <span className="karma">{account.karma} Karma</span>
+              {account.id === user.id && <Link to="/settings"><SettingsApplicationsIcon /></Link>}
             </div>
             {account.id !== user.id && <Button variant="contained" onClick={toggleFollow}>{user.following.includes(account.id) ? "UNFOLLOW" : "FOLLOW"}</Button>}
           </div>
