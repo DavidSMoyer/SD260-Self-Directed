@@ -372,3 +372,46 @@ button.logout:hover {
 .pass-toggle {
   cursor: pointer;
 }
+
+.settings-page {
+  margin: 0 auto;
+  margin-top: 100px;
+  width: 70%;
+  margin-bottom: 100px;
+}
+
+.settings-page form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.settings-page form > div {
+  width: 60%;
+  margin: 20px 0;
+}
+
+.settings-page form > span > div {
+  margin: 0 50px;
+}
+
+.img-section {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.img-section > div {
+  width: 300px;
+}
+
+div.preview {
+  width: 200px;
+  height: 200px;
+}
+
+.settings-page form > input {
+  all: unset;
+  cursor: pointer;
+}
