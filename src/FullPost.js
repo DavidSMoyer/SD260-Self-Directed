@@ -51,7 +51,8 @@ function FullPost({user, setUser}) {
 
   const submitComment = (e) => {
     e.preventDefault();
-    setPost({...post, comments: [...post.comments, {message: commentInput, owner: {id: user.id, name: user.username}, replies: []}]});
+    const id = post.comments.reduce((acc, comment) => comment.id >= acc ? comment.id + 1 : acc, 0);
+    setPost({...post, comments: [...post.comments, {id, likes: 0, message: commentInput, owner: {id: user.id, name: user.username}, replies: []}]});
     setCommentInput("");
   }
 
@@ -113,7 +114,7 @@ function FullPost({user, setUser}) {
           </div>
           <div className="comments">
             {post.comments.map(comment => (
-              <Comment message={comment.message} owner={comment.owner} type="comment" replies={comment.replies} likes={comment.likes} />
+              <Comment message={comment.message} owner={comment.owner} type="comment" replies={comment.replies} likes={comment.likes} post={post} setPost={setPost} id={comment.id} />
             ))}
           </div>
         </div>

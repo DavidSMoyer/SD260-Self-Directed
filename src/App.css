@@ -353,3 +353,12 @@ button.logout:hover {
   margin-left: 25px;
   margin-top: 5px;
 }
+
+.reply-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.reply-list .reply {
+  margin-bottom: 20px;
+}

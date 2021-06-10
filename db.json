@@ -35,7 +35,97 @@
       "imageURL": "https://www.henryford.com/-/media/henry-ford-blog/images/interior-banner-images/2019/11/test-anxiety.jpg",
       "content": "This is a test post. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       "likes": 0,
-      "comments": [],
+      "comments": [
+        {
+          "id": 0,
+          "likes": 0,
+          "message": "Test",
+          "owner": {
+            "id": 2,
+            "name": "TestUser"
+          },
+          "replies": [
+            {
+              "message": "test",
+              "id": 0,
+              "owner": {
+                "name": "TestUser",
+                "id": 2
+              }
+            },
+            {
+              "message": "test",
+              "id": 1,
+              "owner": {
+                "name": "TestUser",
+                "id": 2
+              }
+            },
+            {
+              "message": "test",
+              "id": 2,
+              "owner": {
+                "name": "TestUser",
+                "id": 2
+              }
+            },
+            {
+              "message": "test",
+              "id": 3,
+              "owner": {
+                "name": "TestUser",
+                "id": 2
+              }
+            },
+            {
+              "message": "Test",
+              "id": 4,
+              "owner": {
+                "name": "TestUser",
+                "id": 2
+              }
+            },
+            {
+              "message": "Test",
+              "id": 5,
+              "owner": {
+                "name": "TestUser",
+                "id": 2
+              }
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "likes": 0,
+          "message": "test2",
+          "owner": {
+            "id": 2,
+            "name": "TestUser"
+          },
+          "replies": []
+        },
+        {
+          "id": 2,
+          "likes": 0,
+          "message": "test3",
+          "owner": {
+            "id": 2,
+            "name": "TestUser"
+          },
+          "replies": []
+        },
+        {
+          "id": 3,
+          "likes": 0,
+          "message": "test4",
+          "owner": {
+            "id": 2,
+            "name": "TestUser"
+          },
+          "replies": []
+        }
+      ],
       "owner": {
         "name": "SoftRainbowBoi",
         "id": 1
