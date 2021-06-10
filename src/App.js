@@ -12,6 +12,7 @@ import Login from './Login.js';
 import CreatePost from './CreatePost.js';
 import User from './User.js';
 import AlertPage from './AlertPage.js';
+import Settings from './Settings.js';
 
 function App() {
   const [query, setQuery] = useState("");
@@ -99,6 +100,9 @@ function App() {
                 </Route>
                 <Route path="/alerts" exact>
                   <AlertPage user={user} />
+                </Route>
+                <Route path="/settings" exact>
+                  <Settings user={user} />
                 </Route>
               </Switch>}
             </div>
