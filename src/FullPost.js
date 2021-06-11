@@ -67,18 +67,6 @@ function FullPost({user, setUser}) {
     }
   }
 
-  useEffect(() => {
-    fetch(`http://localhost:5000/users/${user.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      },
-      body: JSON.stringify({liked: user.liked})
-    });
-    const expire = JSON.parse(localStorage.getItem("auto-login")).expire;
-    localStorage.setItem("auto-login", JSON.stringify({user, expire}));
-  }, [user])
-
   return (
     <>
       {  

@@ -39,6 +39,19 @@ function App() {
     setLoaded(true);
   }, []);
 
+  useEffect(() => {
+    if (user === null || loaded === false) return;
+    fetch(`http://localhost:5000/users/${user.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      },
+      body: JSON.stringify(user)
+    });
+    const expire = Date.now() + (24 * 60 * 60 * 1000 * 7);
+    localStorage.setItem("auto-login", JSON.stringify({user, expire}))
+  }, [user])
+
   const logout = (e) => {
     setUser(null);
     localStorage.removeItem('auto-login');
@@ -102,7 +115,7 @@ function App() {
                   <AlertPage user={user} />
                 </Route>
                 <Route path="/settings" exact>
-                  <Settings user={user} />
+                  <Settings user={user} setUser={setUser} />
                 </Route>
               </Switch>}
             </div>
