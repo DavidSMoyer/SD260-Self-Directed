@@ -4,6 +4,7 @@ import {useParams} from 'react-router-dom';
 
 function Search({user, setUser}) {
   const [search, setSearch] = useState("");
+  const [searchType, setSearchType] = useState("posts")
   const {query} = useParams();
 
   useEffect(() => {
@@ -13,9 +14,17 @@ function Search({user, setUser}) {
   return (
     <div className="search-page">
       <div className="search-type">
-        <span>Posts</span>
-        <span>Users</span>
+        <span class={searchType === "posts" ? "selected" : ""} onClick={() => setSearchType("posts")}>Posts</span>
+        <span class={searchType === "users" ? "selected" : ""} onClick={() => setSearchType("users")}>Users</span>
       </div>
+      {
+        searchType === "posts"
+        ?
+          <PostList type="search" query={search} user={user} setUser={setUser} />
+        :
+        /* UserList */
+        undefined
+      }
     </div>
   )
 }
