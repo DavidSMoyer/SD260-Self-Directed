@@ -24,6 +24,7 @@ function Settings({user, setUser}) {
   const [accountResponse, setAccountResponse] = useState({severity: "none", message: "", title: ""});
   const [emailResponse, setEmailResponse] = useState({severity: "none", message: "", title: ""});
   const [passResponse, setPassResponse] = useState({severity: "none", message: "", title: ""});
+  const [imgResponse, setImgResponse] = useState({severity: "none", message: "", title: ""});
   const history = useHistory();
 
   useEffect(() => {
@@ -122,6 +123,25 @@ function Settings({user, setUser}) {
     })();
   }
 
+  const imgSubmit = (e) => {
+    e.preventDefault();
+    (async () => {
+      const updateImg = await fetch(`http://localhost:5000/users/${user.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8"
+        },
+        body: JSON.stringify({imageURL})
+      })
+      if (updateImg.ok) {
+        setUser({...user, imageURL})
+        setImgResponse({severity: "success", title: "Success", message: "Profile successfully updated."});
+      } else {
+        setPassResponse({severity: "error", title: "Error", message: "Something went wrong."});
+      }
+    })();
+  }
+
   return (
     <div className="settings-page">
       <h2>Settings</h2>
@@ -195,8 +215,15 @@ function Settings({user, setUser}) {
         />
         <input type="submit" value="Submit" />
       </form>
-      <form>
+      <form onSubmit={imgSubmit}>
         <h3>Change Profile</h3>
+        {
+          imgResponse.severity !== "none" &&
+          <Alert severity={imgResponse.severity}>
+            <AlertTitle>{imgResponse.title}</AlertTitle>
+            {imgResponse.message}
+          </Alert>
+        }
         <span className="img-section">
           <Avatar src={imageURL} className="preview" />
           <TextField label="Image URL" value={imageURL} onChange={(e) => setImageURL(e.target.value)} />
