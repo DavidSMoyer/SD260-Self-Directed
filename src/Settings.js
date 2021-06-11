@@ -16,7 +16,6 @@ function Settings({user, setUser}) {
   const [oldPassword, setOldPassword] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
-  const [errors, setErrors] = useState([]);
   const [oldPassVisible, setOldPassVisible] = useState(false);
   const [passVisible, setPassVisible] = useState(false);
   const [confirmVisible, setConfirmVisible] = useState(false);
@@ -25,7 +24,6 @@ function Settings({user, setUser}) {
   const [emailResponse, setEmailResponse] = useState({severity: "none", message: "", title: ""});
   const [passResponse, setPassResponse] = useState({severity: "none", message: "", title: ""});
   const [imgResponse, setImgResponse] = useState({severity: "none", message: "", title: ""});
-  const history = useHistory();
 
   useEffect(() => {
     setFname(user.fname);
@@ -45,21 +43,15 @@ function Settings({user, setUser}) {
 
   const accountSubmit = (e) => {
     e.preventDefault();
-    (async () => {
-      const changeAccount = await fetch(`http://localhost:5000/users/${user.id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-type": "application/json; charset=UTF-8"
-        },
-        body: JSON.stringify({fname, lname, username})
-      });
-      if (changeAccount.ok === true) {
-        setUser({...user, fname, lname, username});
-        setAccountResponse({severity: "success", title: "Success!", message: "Account settings successfully updated."});
-      } else {
-        setAccountResponse({severity: "error", title: "Error", message: "Something went wrong."});
-      }
-    })();
+    fetch(`http://localhost:5000/users/${user.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      },
+      body: JSON.stringify({fname, lname, username})
+    });
+    setUser({...user, fname, lname, username});
+    setAccountResponse({severity: "success", title: "Success!", message: "Account settings successfully updated."});
   }
 
   const emailSubmit = (e) => {
@@ -74,22 +66,10 @@ function Settings({user, setUser}) {
         setEmailResponse({severity: "error", title: "Invalid Email", message: "That email is already in use."});
         return;
       }
-      const updateEmail = await fetch(`http://localhost:5000/users/${user.id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-type": "application/json; charset=UTF-8"
-        },
-        body: JSON.stringify({email: newEmail})
-      })
-      console.log(updateEmail)
-      if (updateEmail.ok === true) {
-        setUser({...user, email: newEmail});
-        setEmail(newEmail);
-        setNewEmail("");
-        setEmailResponse({severity: "success", title: "Success!", message: "Email successfully updated."});
-      } else {
-        setEmailResponse({severity: "error", title: "Error", message: "Something went wrong."});
-      }
+      setUser({...user, email: newEmail});
+      setEmail(newEmail);
+      setNewEmail("");
+      setEmailResponse({severity: "success", title: "Success!", message: "Email successfully updated."});
     })();
   }
 
@@ -102,44 +82,33 @@ function Settings({user, setUser}) {
       setPassResponse({severity: "error", title: "Incorrect Password", message: "The password and password confirmation fields do not match."});
       return;
     }
-    (async () => {
-      const passHash = hashSync(password, 10);
-      const updateUser = await fetch(`http://localhost:5000/users/${user.id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-type": "application/json; charset=UTF-8"
-        },
-        body: JSON.stringify({password: passHash})
-      });
-      if (updateUser.ok) {
-        setPassword("");
-        setOldPassword("");
-        setConfirm("");
-        setUser({...user, password: passHash});
-        setPassResponse({severity: "success", title: "Success", message: "Password successfully updated."});
-      } else {
-        setPassResponse({severity: "error", title: "Error", message: "Something went wrong."});
-      }
-    })();
+
+    const passHash = hashSync(password, 10);
+    fetch(`http://localhost:5000/users/${user.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      },
+      body: JSON.stringify({password: passHash})
+    });
+    setPassword("");
+    setOldPassword("");
+    setConfirm("");
+    setUser({...user, password: passHash});
+    setPassResponse({severity: "success", title: "Success", message: "Password successfully updated."});
   }
 
   const imgSubmit = (e) => {
     e.preventDefault();
-    (async () => {
-      const updateImg = await fetch(`http://localhost:5000/users/${user.id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-type": "application/json; charset=UTF-8"
-        },
-        body: JSON.stringify({imageURL})
-      })
-      if (updateImg.ok) {
-        setUser({...user, imageURL})
-        setImgResponse({severity: "success", title: "Success", message: "Profile successfully updated."});
-      } else {
-        setPassResponse({severity: "error", title: "Error", message: "Something went wrong."});
-      }
-    })();
+    fetch(`http://localhost:5000/users/${user.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      },
+      body: JSON.stringify({imageURL})
+    })
+    setUser({...user, imageURL})
+    setImgResponse({severity: "success", title: "Success", message: "Profile successfully updated."});
   }
 
   return (

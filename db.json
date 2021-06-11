@@ -1,5 +1,20 @@
 {
-  "posts": [],
+  "posts": [
+    {
+      "title": "New Post Lol",
+      "imageURL": "",
+      "content": "testing testing 123",
+      "likes": 0,
+      "comments": [],
+      "owner": {
+        "name": "TestUser",
+        "id": 2
+      },
+      "private": false,
+      "postTime": 1623437368388,
+      "id": 1
+    }
+  ],
   "users": [
     {
       "fname": "David",
@@ -7,8 +22,10 @@
       "username": "SoftRainbowBoi",
       "email": "poinky_m@hotmail.com",
       "following": [],
-      "liked": [],
-      "password": "$2a$10$zNooZPMTIuhAU33bBVCLtel7GChRehHav5jiTK8VlHmN/PgzxcZ6C",
+      "liked": [
+        1
+      ],
+      "password": "$2a$10$b8EfTssH9BksYjB93vGH6.pwZACsoklSet3O07Jik7vekeeuVKbYS",
       "id": 1,
       "imageURL": "https://tse1.mm.bing.net/th?id=OIP.0pVwpLhb1hwpINZ07iODeQHaFj&pid=Api&P=0&w=235&h=177",
       "alerts": []
