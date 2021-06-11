@@ -456,3 +456,18 @@ div.preview {
   justify-self: center;
   margin: 20px;
 }
+
+.alert-page ul {
+  list-style: none;
+}
+
+.alert.new {
+  background-color: rgba(0, 217, 255, 0.164);
+}
+
+.alert a {
+  color: black;
+  text-decoration: none;
+  display: inline-block;
+  padding: 20px;
+}

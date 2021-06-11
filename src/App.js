@@ -42,8 +42,10 @@ function App() {
 
   useEffect(() => {
     if (user === null || loaded === false) return;
+    const updateUser = {...user};
+    delete updateUser.alerts;
     fetch(`http://localhost:5000/users/${user.id}`, {
-      method: "PUT",
+      method: "PATCH",
       headers: {
         "Content-type": "application/json; charset=UTF-8"
       },
@@ -57,6 +59,19 @@ function App() {
     setUser(null);
     localStorage.removeItem('auto-login');
     history.push("/login");
+  }
+
+  const alertUser = async (userID, alertTitle, alertMessage, alertRedirect) => {
+    const user = await fetch(`http://localhost:5000/users/${userID}`).then(response => response.json());
+    const alerts = user.alerts;
+    alerts.unshift({title: alertTitle, message: alertMessage, redirect: alertRedirect, seen: false});
+    fetch(`http://localhost:5000/users/${userID}`, {
+      method: "PATCH",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      },
+      body: JSON.stringify({alerts})
+    });
   }
 
   return (
@@ -83,11 +98,11 @@ function App() {
               {<Switch>
                 <Route exact path="/">
                   {user === null && <Redirect to="/login" />}
-                  <PostList type="main" user={user} setUser={setUser} />
+                  <PostList type="main" user={user} setUser={setUser} alert={alertUser} />
                 </Route>
                 <Route exact path="/follow-timeline">
                   {user === null && <Redirect to="/login" />}
-                  <PostList type="follow" user={user} setUser={setUser} />
+                  <PostList type="follow" user={user} setUser={setUser} alert={alertUser} />
                 </Route>
                 <Route exact path="/signup">
                   {user !== null && <Redirect to="/" />}
@@ -103,15 +118,15 @@ function App() {
                 </Route>
                 <Route path="/post/:postId">
                   {user === null && <Redirect to="/login" />}
-                  <FullPost user={user} setUser={setUser} />
+                  <FullPost user={user} setUser={setUser} alert={alertUser} />
                 </Route>
                 <Route path="/user/:accountId">
                   {user === null && <Redirect to="/login" />}
-                  <User user={user} setUser={setUser} />
+                  <User user={user} setUser={setUser} alert={alertUser} />
                 </Route>
                 <Route path="/search/:query">
                   {user === null && <Redirect to="/login" />}
-                  <Search user={user} setUser={setUser} />
+                  <Search user={user} setUser={setUser} alert={alertUser} />
                 </Route>
                 <Route path="/alerts" exact>
                   <AlertPage user={user} />

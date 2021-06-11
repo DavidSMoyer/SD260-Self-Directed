@@ -4,7 +4,7 @@ import {useState, useEffect} from 'react';
 import PostList from './PostList.js';
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 
-function User({user, setUser}) {
+function User({user, setUser, alert}) {
   const [account, setAccount] = useState(undefined);
   const [followers, setFollowers] = useState(0);
   const { accountId } = useParams();
@@ -22,6 +22,7 @@ function User({user, setUser}) {
       setUser({...user, following: user.following.filter(filterUser => filterUser !== account.id)});
     } else {
       setUser({...user, following: [...user.following, account.id]});
+      alert(account.id, "New Follower", `${user.username} is now following you.`, `/user/${user.id}`);
     }
   }
 

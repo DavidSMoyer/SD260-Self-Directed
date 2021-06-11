@@ -5,7 +5,7 @@ import { Link, useHistory } from 'react-router-dom';
 import SmallAcc from './SmallAcc';
 import {useState, useEffect} from 'react';
 
-function Post({post, user, setUser}) {
+function Post({post, user, setUser, alert}) {
   const [postInfo, setPostInfo] = useState(null);
   const [likes, setLikes] = useState(0);
   const [loaded, setLoaded] = useState(false);
@@ -20,6 +20,7 @@ function Post({post, user, setUser}) {
     } else {
       setUser({...user, liked: [...user.liked, post.id]});
       setLikes(likes + 1);
+      alert(postInfo.owner.id, "Post Liked", `${user.username} liked your post, '${postInfo.title}'.`, `/post/${postInfo.id}`);
     }
   }
 
@@ -31,18 +32,6 @@ function Post({post, user, setUser}) {
       setLoaded(true);
     })();
   }, []);
-
-  useEffect(() => {
-    fetch(`http://localhost:5000/users/${user.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      },
-      body: JSON.stringify({liked: user.liked})
-    });
-    const expire = JSON.parse(localStorage.getItem("auto-login")).expire;
-    localStorage.setItem("auto-login", JSON.stringify({expire, user}));
-  }, [user]);
 
   return (
     <>

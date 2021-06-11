@@ -7,7 +7,7 @@ import Comment from './Comment.js';
 import {useState, useEffect} from 'react';
 import { SettingsInputSvideoRounded } from '@material-ui/icons';
 
-function FullPost({user, setUser}) {
+function FullPost({user, setUser, alert}) {
   const [post, setPost] = useState(undefined);
   const [likes, setLikes] = useState(0);
   const [owner, setOwner] = useState(undefined);
@@ -31,7 +31,7 @@ function FullPost({user, setUser}) {
       const users = await fetch(`http://localhost:5000/users`).then(response => response.json());
       setLikes(users.filter(user => user.liked.includes(post.id)).length);
     })();
-    fetch(`http://localhost:5000/posts/${post.id}`,
+    fetch(`http://localhost:5000/post/${post.id}`,
     {
       method: "PATCH",
       headers: {
@@ -52,8 +52,10 @@ function FullPost({user, setUser}) {
   const submitComment = (e) => {
     e.preventDefault();
     const id = post.comments.reduce((acc, comment) => comment.id >= acc ? comment.id + 1 : acc, 0);
+    alert(owner.id, "New Comment", [`${user.username} commented on your post, '${post.title}'.`, `${commentInput}`], `/post/${post.id}`);
     setPost({...post, comments: [...post.comments, {id, likes: 0, message: commentInput, owner: {id: user.id, name: user.username}, replies: []}]});
     setCommentInput("");
+    
   }
 
   const toggleLiked = () => {
@@ -64,6 +66,7 @@ function FullPost({user, setUser}) {
     } else {
       setUser({...user, liked: [...user.liked, post.id]});
       setLikes(likes + 1);
+      alert(owner.id, "Post Liked", `${user.username} liked your post, '${post.title}'.`, `/posts/${post.id}`);
     }
   }
 
