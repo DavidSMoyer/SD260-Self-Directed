@@ -4,7 +4,7 @@ import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import {Link, useHistory} from 'react-router-dom';
 import {useState} from 'react';
-import {hashSync} from 'bcryptjs';
+import {hashSync, compareSync} from 'bcryptjs';
 import { useEffect } from 'react';
 
 function Settings({user, setUser}) {
@@ -13,14 +13,17 @@ function Settings({user, setUser}) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [newEmail, setNewEmail] = useState("");
+  const [oldPassword, setOldPassword] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [errors, setErrors] = useState([]);
+  const [oldPassVisible, setOldPassVisible] = useState(false);
   const [passVisible, setPassVisible] = useState(false);
   const [confirmVisible, setConfirmVisible] = useState(false);
   const [imageURL, setImageURL] = useState("");
   const [accountResponse, setAccountResponse] = useState({severity: "none", message: "", title: ""});
   const [emailResponse, setEmailResponse] = useState({severity: "none", message: "", title: ""});
+  const [passResponse, setPassResponse] = useState({severity: "none", message: "", title: ""});
   const history = useHistory();
 
   useEffect(() => {
@@ -89,11 +92,41 @@ function Settings({user, setUser}) {
     })();
   }
 
+  const passwordSubmit = (e) => {
+    e.preventDefault();
+    if (compareSync(oldPassword, user.password) !== true) {
+      setPassResponse({severity: "error", title: "Incorrect Password", message: "The password that you input is incorrect."});
+      return;
+    } else if (password !== confirm) {
+      setPassResponse({severity: "error", title: "Incorrect Password", message: "The password and password confirmation fields do not match."});
+      return;
+    }
+    (async () => {
+      const passHash = hashSync(password, 10);
+      const updateUser = await fetch(`http://localhost:5000/users/${user.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8"
+        },
+        body: JSON.stringify({password: passHash})
+      });
+      if (updateUser.ok) {
+        setPassword("");
+        setOldPassword("");
+        setConfirm("");
+        setUser({...user, password: passHash});
+        setPassResponse({severity: "success", title: "Success", message: "Password successfully updated."});
+      } else {
+        setPassResponse({severity: "error", title: "Error", message: "Something went wrong."});
+      }
+    })();
+  }
+
   return (
     <div className="settings-page">
       <h2>Settings</h2>
       <form onSubmit={accountSubmit}>
-        <h3>Update Account</h3>
+        <h3>Change Account</h3>
         {
           accountResponse.severity !== "none" &&
           <Alert severity={accountResponse.severity}>
@@ -117,12 +150,29 @@ function Settings({user, setUser}) {
             {emailResponse.message}
           </Alert>
         }
-        <TextField required label="Email" disabled value={email} />
+        <TextField label="Email" disabled value={email} />
         <TextField required label="New Email" onChange={e => setNewEmail(e.target.value)}  value={newEmail} />
         <input type="submit" value="Submit" />
       </form>
-      <form>
+      <form onSubmit={passwordSubmit}>
         <h3>Change Password</h3>
+        {
+          passResponse.severity !== "none" &&
+          <Alert severity={passResponse.severity}>
+            <AlertTitle>{passResponse.title}</AlertTitle>
+            {passResponse.message}
+          </Alert>
+        }
+        <TextField 
+          required
+          label="Old Password"
+          InputProps={{endAdornment: (
+            <InputAdornment position="end" className="pass-toggle" onClick={() => setOldPassVisible(!oldPassVisible)}>{oldPassVisible ? <VisibilityIcon /> : <VisibilityOffIcon />}</InputAdornment>
+          )}}
+          onChange={(e) => update(e, setOldPassword, 50)}
+          type={oldPassVisible ? "text" : "password"}
+          value={oldPassword}
+        />
         <TextField 
           required
           label="Password"
