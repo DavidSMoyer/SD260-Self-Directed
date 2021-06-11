@@ -13,6 +13,7 @@ import CreatePost from './CreatePost.js';
 import User from './User.js';
 import AlertPage from './AlertPage.js';
 import Settings from './Settings.js';
+import Search from './Search.js';
 
 function App() {
   const [query, setQuery] = useState("");
@@ -110,6 +111,7 @@ function App() {
                 </Route>
                 <Route path="/search/:query">
                   {user === null && <Redirect to="/login" />}
+                  <Search user={user} setUser={setUser} />
                 </Route>
                 <Route path="/alerts" exact>
                   <AlertPage user={user} />
