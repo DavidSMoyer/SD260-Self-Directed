@@ -102,7 +102,7 @@ function App() {
                   <AlertPage user={user} />
                 </Route>
                 <Route path="/settings" exact>
-                  <Settings user={user} />
+                  <Settings user={user} setUser={setUser} />
                 </Route>
               </Switch>}
             </div>

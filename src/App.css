@@ -415,3 +415,7 @@ div.preview {
   all: unset;
   cursor: pointer;
 }
+
+.settings-page form {
+  margin-bottom: 100px;
+}
