@@ -31,7 +31,7 @@ function FullPost({user, setUser, alert}) {
       const users = await fetch(`http://localhost:5000/users`).then(response => response.json());
       setLikes(users.filter(user => user.liked.includes(post.id)).length);
     })();
-    fetch(`http://localhost:5000/posts/${post.id}`,
+    fetch(`http://localhost:5000/post/${post.id}`,
     {
       method: "PATCH",
       headers: {
@@ -52,7 +52,7 @@ function FullPost({user, setUser, alert}) {
   const submitComment = (e) => {
     e.preventDefault();
     const id = post.comments.reduce((acc, comment) => comment.id >= acc ? comment.id + 1 : acc, 0);
-    alert(owner.id, "New Comment", `${user.username} commented on your post '${post.title}'\n${commentInput}`, `/posts/${post.id}`);
+    alert(owner.id, "New Comment", [`${user.username} commented on your post, '${post.title}'.`, `${commentInput}`], `/post/${post.id}`);
     setPost({...post, comments: [...post.comments, {id, likes: 0, message: commentInput, owner: {id: user.id, name: user.username}, replies: []}]});
     setCommentInput("");
     
@@ -66,7 +66,7 @@ function FullPost({user, setUser, alert}) {
     } else {
       setUser({...user, liked: [...user.liked, post.id]});
       setLikes(likes + 1);
-      alert(owner.id, "Post Liked", `${user.username} liked your post. '${post.title}'`, `/posts/${post.id}`);
+      alert(owner.id, "Post Liked", `${user.username} liked your post, '${post.title}'.`, `/posts/${post.id}`);
     }
   }
 
