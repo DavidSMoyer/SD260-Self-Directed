@@ -1,7 +1,7 @@
 import Post from './Post.js';
 import {useEffect, useState} from 'react';
 
-function PostList({type, user, account, setUser}) {
+function PostList({type, user, account, setUser, query}) {
   const [postList, setPostList] = useState([]);
 
   useEffect(() => {
@@ -14,6 +14,9 @@ function PostList({type, user, account, setUser}) {
         posts = posts.filter(post => user.following.includes(post.owner.id));
       } else if (type === "owned") {
         posts = posts.filter(post => post.owner.id === account.id);
+      } else if (type === "search") {
+        posts = posts.filter(post => post.owner.id !== user.id);
+        posts = posts.filter(post => post.title.toLowerCase().includes(query.toLowerCase()) || post.content.toLowerCase().includes(query.toLowerCase()));
       }
 
       if (type !== "owned" || account.id !== user.id) {
@@ -25,7 +28,7 @@ function PostList({type, user, account, setUser}) {
         setPostList(posts);
       }
     })();
-  }, [account, type])
+  }, [account, type, query])
 
   return (
     <div className="post-list">
