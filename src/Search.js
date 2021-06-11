@@ -1,6 +1,7 @@
 import PostList from './PostList.js';
 import {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
+import UserList from './UserList.js';
 
 function Search({user, setUser}) {
   const [search, setSearch] = useState("");
@@ -22,8 +23,7 @@ function Search({user, setUser}) {
         ?
           <PostList type="search" query={search} user={user} setUser={setUser} />
         :
-        /* UserList */
-        undefined
+          <UserList query={search} user={user} />
       }
     </div>
   )
