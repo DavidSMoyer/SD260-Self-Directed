@@ -14,6 +14,7 @@ import User from './User.js';
 import AlertPage from './AlertPage.js';
 import Settings from './Settings.js';
 import Search from './Search.js';
+import {compareSync} from 'bcryptjs';
 
 function App() {
   const [query, setQuery] = useState("");
@@ -27,17 +28,36 @@ function App() {
   }
 
   useEffect(() => {
+    const abort = () => {
+      setLoaded(true);
+      localStorage.removeItem("auto-login");
+    }
     const oldUser = JSON.parse(localStorage.getItem("auto-login"));
     if (oldUser !== null) {
       if (oldUser.expire > Date.now()) {
-        oldUser.expire = Date.now() + (24 * 60 * 60 * 1000 * 7);
-        setUser(oldUser.user);
-        localStorage.setItem("auto-login", JSON.stringify(oldUser));
+        (async () => {
+          oldUser.expire = Date.now() + (24 * 60 * 60 * 1000 * 7);
+          const userMatch = await fetch(`http://localhost:5000/users?username=${oldUser.user.username}`).then(response => response.json());
+          console.log(userMatch);
+          if (userMatch.length === 0) {
+            abort();
+            return;
+          }
+          const user = userMatch[0];
+          if (user.username !== oldUser.user.username || user.password !== oldUser.user.password) {
+            abort();
+            return;
+          }
+          setUser(oldUser.user);
+          localStorage.setItem("auto-login", JSON.stringify(oldUser));
+          setLoaded(true);
+        })()
       } else {
-        localStorage.removeItem("auto-login");
+        abort();
       }
+    } else {
+      setLoaded(true);
     }
-    setLoaded(true);
   }, []);
 
   useEffect(() => {
@@ -91,14 +111,25 @@ function App() {
             </IconButton>
           }
           <div className="layout-grid">
-            <NotRoute path={["/login","/signup"]} replace="true">
-              <Navbar user={user} />
-            </NotRoute>
+            {
+              user !== null
+              ?
+              <NotRoute path={["/login","/signup"]} replace="true">
+                <Navbar user={user} />
+              </NotRoute>
+              :
+              <div></div>
+            }
             <div className="scroll-container">
               {<Switch>
                 <Route exact path="/">
-                  {user === null && <Redirect to="/login" />}
-                  <PostList type="main" user={user} setUser={setUser} alert={alertUser} />
+                  {
+                    user === null 
+                    ? 
+                    <Redirect to="/login" />
+                    :
+                    <PostList type="main" user={user} setUser={setUser} alert={alertUser} />
+                  }
                 </Route>
                 <Route exact path="/follow-timeline">
                   {user === null && <Redirect to="/login" />}

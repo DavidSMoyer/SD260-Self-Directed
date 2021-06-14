@@ -75,11 +75,11 @@ function FullPost({user, setUser, alert}) {
       {  
         loaded &&
         <div className="post-page">
-          {(!owner.following.includes(user.id) && post.private) && <Redirect to="/" />}
+          {((!owner.following.includes(user.id) && post.private && owner.id !== user.id)) && <Redirect to="/" />}
           <div className="post-content">
             <h2>{post.title}</h2>
             <Link className="owner" to={`/user/${post.owner.id}`}>
-              <Avatar className="owner-avatar" src={owner.imageURL}>{owner.imageURL === "" && owner.username[0].toUpperCase()}</Avatar>
+              <Avatar className="owner-avatar" src={owner.imageURL}>{(owner.imageURL === "" || owner.imageURL === undefined) && owner.username[0].toUpperCase()}</Avatar>
               <span>{owner.username}</span>
             </Link>
             {post.imageURl !== "" && <img src={post.imageURL} />}

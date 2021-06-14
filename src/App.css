@@ -59,6 +59,7 @@ nav {
   display: inline-block;
   color: black;
   text-decoration: none;
+  height: auto;
 }
 
 .post {
@@ -485,4 +486,8 @@ div.preview {
   transform: translate(-50%, -50%);
   cursor: pointer;
   padding: 20px;
+}
+
+div.user-avatar {
+  font-size: 50px;
 }
