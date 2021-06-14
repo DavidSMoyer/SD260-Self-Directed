@@ -91,14 +91,25 @@ function App() {
             </IconButton>
           }
           <div className="layout-grid">
-            <NotRoute path={["/login","/signup"]} replace="true">
-              <Navbar user={user} />
-            </NotRoute>
+            {
+              user !== null
+              ?
+              <NotRoute path={["/login","/signup"]} replace="true">
+                <Navbar user={user} />
+              </NotRoute>
+              :
+              <div></div>
+            }
             <div className="scroll-container">
               {<Switch>
                 <Route exact path="/">
-                  {user === null && <Redirect to="/login" />}
-                  <PostList type="main" user={user} setUser={setUser} alert={alertUser} />
+                  {
+                    user === null 
+                    ? 
+                    <Redirect to="/login" />
+                    :
+                    <PostList type="main" user={user} setUser={setUser} alert={alertUser} />
+                  }
                 </Route>
                 <Route exact path="/follow-timeline">
                   {user === null && <Redirect to="/login" />}
