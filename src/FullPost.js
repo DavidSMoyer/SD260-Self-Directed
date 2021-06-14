@@ -6,6 +6,7 @@ import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import Comment from './Comment.js';
 import {useState, useEffect} from 'react';
 import { SettingsInputSvideoRounded } from '@material-ui/icons';
+import LoadingIcon from './LoadingIcon.js';
 
 function FullPost({user, setUser, alert}) {
   const [post, setPost] = useState(undefined);
@@ -73,7 +74,8 @@ function FullPost({user, setUser, alert}) {
   return (
     <>
       {  
-        loaded &&
+        loaded
+        ?
         <div className="post-page">
           {((!owner.following.includes(user.id) && post.private && owner.id !== user.id)) && <Redirect to="/" />}
           <div className="post-content">
@@ -109,6 +111,8 @@ function FullPost({user, setUser, alert}) {
             ))}
           </div>
         </div>
+        :
+        <LoadingIcon />
       }
     </>
   )

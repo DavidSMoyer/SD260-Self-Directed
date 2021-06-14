@@ -491,3 +491,15 @@ div.preview {
 div.user-avatar {
   font-size: 50px;
 }
+
+.loading-icon {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#root > .loading-icon {
+  height: 100vh;
+}

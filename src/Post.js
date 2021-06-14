@@ -4,6 +4,7 @@ import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import { Link, useHistory } from 'react-router-dom';
 import SmallAcc from './SmallAcc';
 import {useState, useEffect} from 'react';
+import LoadingIcon from './LoadingIcon.js';
 
 function Post({post, user, setUser, alert}) {
   const [postInfo, setPostInfo] = useState(null);
@@ -36,7 +37,8 @@ function Post({post, user, setUser, alert}) {
   return (
     <>
       {
-        loaded &&
+        loaded
+        ?
         <Link to={`/post/${postInfo.id}`} className="post-link">
           <div className="post">
             <h3>{postInfo.title}</h3>
@@ -55,6 +57,8 @@ function Post({post, user, setUser, alert}) {
             {postInfo.imageURL !== "" && <p>{postInfo.content}</p>}
           </div>
         </Link>
+        :
+        <LoadingIcon />
       }
     </>
   )

@@ -15,8 +15,11 @@ function PostList({type, user, account, setUser, query, alert}) {
       } else if (type === "owned") {
         posts = posts.filter(post => post.owner.id === account.id);
       } else if (type === "search") {
+        console.log(posts);
         posts = posts.filter(post => post.owner.id !== user.id);
+        console.log(posts);
         posts = posts.filter(post => post.title.toLowerCase().includes(query.toLowerCase()) || post.content.toLowerCase().includes(query.toLowerCase()));
+        console.log(posts);
       }
 
       if (type !== "owned" || account.id !== user.id) {
@@ -32,9 +35,10 @@ function PostList({type, user, account, setUser, query, alert}) {
 
   return (
     <div className="post-list">
-      {postList.map((post, idx) => (
-        <Post key={idx} post={post} user={user} setUser={setUser} alert={alert} />
-      ))}
+      {postList.map((post, idx) => {
+        console.log(post);
+        return <Post key={idx} post={post} user={user} setUser={setUser} alert={alert} />
+      })}
     </div>
   )
 }
