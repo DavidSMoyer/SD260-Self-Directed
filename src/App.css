@@ -503,3 +503,11 @@ div.user-avatar {
 #root > .loading-icon {
   height: 100vh;
 }
+
+.delete-post {
+  all: unset;
+  cursor: pointer;
+  position: relative;
+  left: 99%;
+  transform: translateX(-50%);
+}
