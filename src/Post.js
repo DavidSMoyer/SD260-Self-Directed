@@ -13,7 +13,7 @@ function Post({post, user, setUser, alert}) {
   const history = useHistory();
 
   const toggleLike = (e) => {
-    if (post.owner.id === user.id) return;
+    if (post.owner === user.id) return;
     e.preventDefault();
     if (user.liked.includes(post.id)) {
       setUser({...user, liked: user.liked.filter(postId => postId !== post.id)});
@@ -21,7 +21,7 @@ function Post({post, user, setUser, alert}) {
     } else {
       setUser({...user, liked: [...user.liked, post.id]});
       setLikes(likes + 1);
-      alert(postInfo.owner.id, "Post Liked", `${user.username} liked your post, '${postInfo.title}'.`, `/post/${postInfo.id}`);
+      alert(postInfo.owner, "Post Liked", `${user.username} liked your post, '${postInfo.title}'.`, `/post/${postInfo.id}`);
     }
   }
 
@@ -45,7 +45,7 @@ function Post({post, user, setUser, alert}) {
             {postInfo.imageURL !== "" ? <img src={postInfo.imageURL}/> : <p>{postInfo.content}</p>}
             <div className="stats">
               <span>
-                {user.liked.includes(postInfo.id) || postInfo.owner.id === user.id ? <FavoriteIcon onClick={toggleLike} className="like-icon" /> : <FavoriteBorderIcon onClick={toggleLike} className="like-icon" />}
+                {user.liked.includes(postInfo.id) || postInfo.owner === user.id ? <FavoriteIcon onClick={toggleLike} className="like-icon" /> : <FavoriteBorderIcon onClick={toggleLike} className="like-icon" />}
                 {likes}
               </span>
               <span>

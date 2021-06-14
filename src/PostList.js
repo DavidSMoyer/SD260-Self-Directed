@@ -14,7 +14,7 @@ function PostList({type, user, account, setUser, query, alert}) {
         } else if (type === "search") {
           posts = posts.filter(post => post.title.toLowerCase().includes(query.toLowerCase()) || post.content.toLowerCase().includes(query.toLowerCase()));
         }
-        posts = posts.filter(post => post.owner.id !== user.id);
+        posts = posts.filter(post => post.owner !== user.id);
         const ownerList = posts.map(post => fetch(`http://localhost:5000/users/${post.owner.id}`));
         await Promise.all(ownerList).then(responses => {
           Promise.all(responses.map(response => response.json())).then(owners => {
