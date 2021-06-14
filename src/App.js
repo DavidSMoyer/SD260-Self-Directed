@@ -64,7 +64,7 @@ function App() {
   const alertUser = async (userID, alertTitle, alertMessage, alertRedirect) => {
     const user = await fetch(`http://localhost:5000/users/${userID}`).then(response => response.json());
     const alerts = user.alerts;
-    alerts.unshift({title: alertTitle, message: alertMessage, redirect: alertRedirect, seen: false});
+    alerts.unshift({title: alertTitle, message: alertMessage, redirect: alertRedirect, seen: false, id: alerts.reduce((acc, alert) => alert.id >= acc ? alert.id + 1 : acc, 0)});
     fetch(`http://localhost:5000/users/${userID}`, {
       method: "PATCH",
       headers: {
@@ -129,7 +129,7 @@ function App() {
                   <Search user={user} setUser={setUser} alert={alertUser} />
                 </Route>
                 <Route path="/alerts" exact>
-                  <AlertPage user={user} />
+                  <AlertPage user={user} setUser={setUser} />
                 </Route>
                 <Route path="/settings" exact>
                   <Settings user={user} setUser={setUser} />

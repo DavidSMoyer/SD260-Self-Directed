@@ -461,6 +461,10 @@ div.preview {
   list-style: none;
 }
 
+.alert {
+  position: relative;
+}
+
 .alert.new {
   background-color: rgba(0, 217, 255, 0.164);
 }
@@ -469,5 +473,16 @@ div.preview {
   color: black;
   text-decoration: none;
   display: inline-block;
+  padding: 20px;
+}
+
+.alert button {
+  all: unset;
+  color: red;
+  position: absolute;
+  top: 50%;
+  left: 95%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
   padding: 20px;
 }
