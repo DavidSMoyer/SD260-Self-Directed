@@ -6,6 +6,7 @@ import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import Comment from './Comment.js';
 import {useState, useEffect} from 'react';
 import { SettingsInputSvideoRounded } from '@material-ui/icons';
+import LoadingIcon from './LoadingIcon.js';
 
 function FullPost({user, setUser, alert}) {
   const [post, setPost] = useState(undefined);
@@ -19,7 +20,7 @@ function FullPost({user, setUser, alert}) {
     (async () => {
       const postReq = await fetch(`http://localhost:5000/posts/${postId}`).then(response => response.json());
       setPost(postReq);
-      const ownerReq = await fetch(`http://localhost:5000/users/${postReq.owner.id}`).then(response => response.json());
+      const ownerReq = await fetch(`http://localhost:5000/users/${postReq.owner}`).then(response => response.json());
       setOwner(ownerReq);
       setLoaded(true);
     })()
@@ -52,33 +53,34 @@ function FullPost({user, setUser, alert}) {
   const submitComment = (e) => {
     e.preventDefault();
     const id = post.comments.reduce((acc, comment) => comment.id >= acc ? comment.id + 1 : acc, 0);
-    alert(owner.id, "New Comment", [`${user.username} commented on your post, '${post.title}'.`, `${commentInput}`], `/post/${post.id}`);
+    alert(owner, "New Comment", [`${user.username} commented on your post, '${post.title}'.`, `${commentInput}`], `/post/${post.id}`);
     setPost({...post, comments: [...post.comments, {id, likes: 0, message: commentInput, owner: {id: user.id, name: user.username}, replies: []}]});
     setCommentInput("");
     
   }
 
   const toggleLiked = () => {
-    if (post.owner.id === user.id) return;
+    if (post.owner === user.id) return;
     if (user.liked.includes(post.id)) {
       setUser({...user, liked: user.liked.filter(likedId => likedId !== post.id)});
       setLikes(likes - 1);
     } else {
       setUser({...user, liked: [...user.liked, post.id]});
       setLikes(likes + 1);
-      alert(owner.id, "Post Liked", `${user.username} liked your post, '${post.title}'.`, `/posts/${post.id}`);
+      alert(owner, "Post Liked", `${user.username} liked your post, '${post.title}'.`, `/posts/${post.id}`);
     }
   }
 
   return (
     <>
       {  
-        loaded &&
+        loaded
+        ?
         <div className="post-page">
-          {((!owner.following.includes(user.id) && post.private && owner.id !== user.id)) && <Redirect to="/" />}
+          {((!owner.following.includes(user.id) && post.private && owner !== user.id)) && <Redirect to="/" />}
           <div className="post-content">
             <h2>{post.title}</h2>
-            <Link className="owner" to={`/user/${post.owner.id}`}>
+            <Link className="owner" to={`/user/${post.owner}`}>
               <Avatar className="owner-avatar" src={owner.imageURL}>{(owner.imageURL === "" || owner.imageURL === undefined) && owner.username[0].toUpperCase()}</Avatar>
               <span>{owner.username}</span>
             </Link>
@@ -86,7 +88,7 @@ function FullPost({user, setUser, alert}) {
             <p>{post.content}</p>
             <form className="actions" onSubmit={submitComment}>
               <span>
-                {user.liked.includes(post.id) || post.owner.id === user.id ? <FavoriteIcon onClick={toggleLiked} className="like-icon" /> : <FavoriteBorderIcon onClick={toggleLiked} className="like-icon" />}
+                {user.liked.includes(post.id) || post.owner === user.id ? <FavoriteIcon onClick={toggleLiked} className="like-icon" /> : <FavoriteBorderIcon onClick={toggleLiked} className="like-icon" />}
                 {likes}
               </span>
               <span>
@@ -94,7 +96,7 @@ function FullPost({user, setUser, alert}) {
                 {post.comments.length}
               </span>
               {
-                post.owner.id !== user.id && 
+                post.owner !== user.id && 
                 <>
                   <TextField placeholder="Comment" required className="comment-input" onChange={updateComment} value={commentInput} id="comment" />
                   <input type="submit" value="Submit" />
@@ -109,6 +111,8 @@ function FullPost({user, setUser, alert}) {
             ))}
           </div>
         </div>
+        :
+        <LoadingIcon />
       }
     </>
   )

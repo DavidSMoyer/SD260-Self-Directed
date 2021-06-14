@@ -23,7 +23,7 @@ function Login({login}) {
       const user = searchByName ? searchByName : searchByEmail;
       login(user);
       const expire = Date.now() + (24 * 60 * 60 * 1000 * 7);
-      localStorage.setItem("auto-login", JSON.stringify({expire, user}));
+      localStorage.setItem("auto-login", JSON.stringify({expire, user: {username: user.username, password: user.password}}));
       history.push("/");
       return;
     }
