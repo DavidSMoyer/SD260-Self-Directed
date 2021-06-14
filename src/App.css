@@ -487,3 +487,7 @@ div.preview {
   cursor: pointer;
   padding: 20px;
 }
+
+div.user-avatar {
+  font-size: 50px;
+}

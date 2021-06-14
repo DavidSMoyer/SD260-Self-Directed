@@ -79,7 +79,7 @@ function FullPost({user, setUser, alert}) {
           <div className="post-content">
             <h2>{post.title}</h2>
             <Link className="owner" to={`/user/${post.owner.id}`}>
-              <Avatar className="owner-avatar" src={owner.imageURL}>{owner.imageURL === "" && owner.username[0].toUpperCase()}</Avatar>
+              <Avatar className="owner-avatar" src={owner.imageURL}>{(owner.imageURL === "" || owner.imageURL === undefined) && owner.username[0].toUpperCase()}</Avatar>
               <span>{owner.username}</span>
             </Link>
             {post.imageURl !== "" && <img src={post.imageURL} />}

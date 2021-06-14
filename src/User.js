@@ -50,7 +50,7 @@ function User({user, setUser, alert}) {
         <div className="account-page">
           <div className="account">
             <div className="account-details">
-              <Avatar src={account.imageURL}>{account.imageURL === "" && account.username[0].toUpperCase()}</Avatar>
+              <Avatar src={account.imageURL} className="user-avatar">{(account.imageURL === "" || account.imageURL === undefined) && account.username[0].toUpperCase()}</Avatar>
               <span className="username">{account.username}</span>
             </div>
             <div className="stats">
