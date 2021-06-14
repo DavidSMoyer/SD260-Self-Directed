@@ -4,15 +4,16 @@ import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import { Link, useHistory } from 'react-router-dom';
 import SmallAcc from './SmallAcc';
 import {useState, useEffect} from 'react';
+import LoadingIcon from './LoadingIcon.js';
 
-function Post({post, user, setUser}) {
+function Post({post, user, setUser, alert}) {
   const [postInfo, setPostInfo] = useState(null);
   const [likes, setLikes] = useState(0);
   const [loaded, setLoaded] = useState(false);
   const history = useHistory();
 
   const toggleLike = (e) => {
-    if (post.owner.id === user.id) return;
+    if (post.owner === user.id) return;
     e.preventDefault();
     if (user.liked.includes(post.id)) {
       setUser({...user, liked: user.liked.filter(postId => postId !== post.id)});
@@ -20,6 +21,7 @@ function Post({post, user, setUser}) {
     } else {
       setUser({...user, liked: [...user.liked, post.id]});
       setLikes(likes + 1);
+      alert(postInfo.owner, "Post Liked", `${user.username} liked your post, '${postInfo.title}'.`, `/post/${postInfo.id}`);
     }
   }
 
@@ -32,29 +34,18 @@ function Post({post, user, setUser}) {
     })();
   }, []);
 
-  useEffect(() => {
-    fetch(`http://localhost:5000/users/${user.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      },
-      body: JSON.stringify({liked: user.liked})
-    });
-    const expire = JSON.parse(localStorage.getItem("auto-login")).expire;
-    localStorage.setItem("auto-login", JSON.stringify({expire, user}));
-  }, [user]);
-
   return (
     <>
       {
-        loaded &&
+        loaded
+        ?
         <Link to={`/post/${postInfo.id}`} className="post-link">
           <div className="post">
             <h3>{postInfo.title}</h3>
             {postInfo.imageURL !== "" ? <img src={postInfo.imageURL}/> : <p>{postInfo.content}</p>}
             <div className="stats">
               <span>
-                {user.liked.includes(postInfo.id) || postInfo.owner.id === user.id ? <FavoriteIcon onClick={toggleLike} className="like-icon" /> : <FavoriteBorderIcon onClick={toggleLike} className="like-icon" />}
+                {user.liked.includes(postInfo.id) || postInfo.owner === user.id ? <FavoriteIcon onClick={toggleLike} className="like-icon" /> : <FavoriteBorderIcon onClick={toggleLike} className="like-icon" />}
                 {likes}
               </span>
               <span>
@@ -66,6 +57,8 @@ function Post({post, user, setUser}) {
             {postInfo.imageURL !== "" && <p>{postInfo.content}</p>}
           </div>
         </Link>
+        :
+        <LoadingIcon />
       }
     </>
   )

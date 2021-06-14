@@ -14,7 +14,7 @@ function Navbar({user}) {
       <Link to="/create" className="link-icon"><AddIcon style={{"fontSize": 45}} /></Link>
       <Link to="/" className="link-icon"><HomeIcon style={{"fontSize": 35}} /></Link>
       <Link to="/alerts" className="link-icon">
-        <Badge badgeContent={0} color="secondary">
+        <Badge badgeContent={user.alerts.filter(alert => !alert.seen).length} color="secondary">
           <NotificationsIcon style={{"fontSize": 35}} />
         </Badge>
       </Link>
