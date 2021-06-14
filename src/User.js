@@ -56,7 +56,6 @@ function User({user, setUser, alert}) {
             <div className="stats">
               <span className="followers">{followers} Followers</span>
               <span className="following">{account.following.length} Following</span>
-              <span className="karma">{account.karma} Karma</span>
               {account.id === user.id && <Link to="/settings"><SettingsApplicationsIcon /></Link>}
             </div>
             {account.id !== user.id && <Button variant="contained" onClick={toggleFollow}>{user.following.includes(account.id) ? "UNFOLLOW" : "FOLLOW"}</Button>}
