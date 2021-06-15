@@ -57,7 +57,7 @@ function FullPost({user, setUser, alert}) {
     const id = post.comments.reduce((acc, comment) => comment.id >= acc ? comment.id + 1 : acc, 0);
     console.log(owner);
     alert(owner.id, "New Comment", `${user.username} commented on your post, '${post.title}'.`, `/post/${post.id}`);
-    setPost({...post, comments: [...post.comments, {id, likes: 0, message: commentInput, owner: {id: user.id, name: user.username}, replies: []}]});
+    setPost({...post, comments: [...post.comments, {id, likes: 0, message: commentInput, owner: user.id, replies: []}]});
     setCommentInput("");
     
   }
@@ -105,6 +105,7 @@ function FullPost({user, setUser, alert}) {
             </Link>
             {post.imageURl !== "" && <img src={post.imageURL} />}
             <p>{post.content}</p>
+
             <form className="actions" onSubmit={submitComment}>
               <span>
                 {user.liked.includes(post.id) || post.owner === user.id ? <FavoriteIcon onClick={toggleLiked} className="like-icon" /> : <FavoriteBorderIcon onClick={toggleLiked} className="like-icon" />}
@@ -121,12 +122,24 @@ function FullPost({user, setUser, alert}) {
                   <input type="submit" value="Submit" />
                 </>
               }
-              
             </form>
           </div>
+
           <div className="comments">
             {post.comments.map((comment, idx) => (
-              <Comment key={idx} message={comment.message} owner={comment.owner} type="comment" replies={comment.replies} likes={comment.likes} post={post} setPost={setPost} id={comment.id} />
+              <Comment 
+                key={idx} 
+                message={comment.message} 
+                owner={comment.owner} 
+                type="comment" 
+                replies={comment.replies} 
+                likes={comment.likes} 
+                post={post} 
+                setPost={setPost} 
+                id={comment.id} 
+                user={user}
+                alert={alert}
+              />
             ))}
           </div>
         </div>
