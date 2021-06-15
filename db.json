@@ -1,4 +1,97 @@
 {
-  "posts": [],
-  "users": []
+  "posts": [
+    {
+      "title": "Hi!",
+      "imageURL": "https://tse2.mm.bing.net/th?id=OIP.nzjq7FImpwgw7Szjb8CczgHaFj&pid=Api&P=0&w=252&h=190",
+      "content": "I'm new :)",
+      "likes": 0,
+      "comments": [],
+      "owner": 2,
+      "private": false,
+      "postTime": 1623787111395,
+      "id": 1
+    },
+    {
+      "title": "Hello other humans!",
+      "imageURL": "",
+      "content": "I am another human and definitely not a robot! Let's be friends! :)",
+      "likes": 0,
+      "comments": [],
+      "owner": 4,
+      "private": false,
+      "postTime": 1623787216309,
+      "id": 3
+    },
+    {
+      "title": "Testing Testing 123",
+      "imageURL": "",
+      "content": "Testing Testing 123",
+      "likes": 0,
+      "comments": [],
+      "owner": 1,
+      "private": false,
+      "postTime": 1623787236263,
+      "id": 4
+    },
+    {
+      "title": "TROLOLOLOL",
+      "imageURL": "",
+      "content": "SPAMSPAMSPAMSPAMSPAMSPAMSPAMSPAMSPAMSPAMSPAMSPAMSPAMSPAMSPAMSPAMSPAMSPAMSPAMSPAM",
+      "likes": 0,
+      "comments": [],
+      "owner": 3,
+      "private": false,
+      "postTime": 1623787350370,
+      "id": 5
+    }
+  ],
+  "users": [
+    {
+      "fname": "Test",
+      "lname": "User",
+      "username": "TestUser",
+      "email": "test@test.com",
+      "following": [],
+      "liked": [],
+      "password": "$2a$10$50lh5oLhjvOmyj3rZnHAd.8/IUN76dkMN6vyi/6iDoBW2lKXFg/lu",
+      "alerts": [],
+      "id": 1
+    },
+    {
+      "fname": "New",
+      "lname": "User",
+      "username": "NewUser",
+      "email": "new@user.com",
+      "following": [],
+      "liked": [],
+      "password": "$2a$10$misUQCtW/psRjqZq/CduNODiD5xp/EcupaCS5bGgnzrPHuaZcO/be",
+      "alerts": [],
+      "id": 2,
+      "imageURL": "https://tse4.mm.bing.net/th?id=OIP.fpaUV35ECaGkz-YNCrBSwQHaHa&pid=Api&P=0&w=300&h=300"
+    },
+    {
+      "fname": "Troll",
+      "lname": "User",
+      "username": "Troll",
+      "email": "troll@lol.com",
+      "following": [],
+      "liked": [],
+      "password": "$2a$10$6UluFROQE2pbq19jV7FxUuzCzchytwyQSjq.7hjLoFGAdX3qmWilO",
+      "alerts": [],
+      "id": 3,
+      "imageURL": "https://www.vippng.com/png/detail/43-432666_troll-face-png.png"
+    },
+    {
+      "fname": "Totally",
+      "lname": "Human",
+      "username": "TotallyHuman",
+      "email": "totally@human.com",
+      "following": [],
+      "liked": [],
+      "password": "$2a$10$c2AFWa.pHhS1jPCCW/K4mulRxern.flOVdoZjFloZ0NmHaJgPEHyK",
+      "alerts": [],
+      "id": 4,
+      "imageURL": "https://cdnb.artstation.com/p/marketplace/presentation_assets/000/360/605/large/file.jpg?1588300331"
+    }
+  ]
 }
