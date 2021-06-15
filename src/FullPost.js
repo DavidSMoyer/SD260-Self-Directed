@@ -34,7 +34,7 @@ function FullPost({user, setUser, alert}) {
       const users = await fetch(`http://localhost:5000/users`).then(response => response.json());
       setLikes(users.filter(user => user.liked.includes(post.id)).length);
     })();
-    fetch(`http://localhost:5000/post/${post.id}`,
+    fetch(`http://localhost:5000/posts/${post.id}`,
     {
       method: "PATCH",
       headers: {
@@ -55,7 +55,8 @@ function FullPost({user, setUser, alert}) {
   const submitComment = (e) => {
     e.preventDefault();
     const id = post.comments.reduce((acc, comment) => comment.id >= acc ? comment.id + 1 : acc, 0);
-    alert(owner, "New Comment", [`${user.username} commented on your post, '${post.title}'.`, `${commentInput}`], `/post/${post.id}`);
+    console.log(owner);
+    alert(owner.id, "New Comment", [`${user.username} commented on your post, '${post.title}'.`, `${commentInput}`], `/post/${post.id}`);
     setPost({...post, comments: [...post.comments, {id, likes: 0, message: commentInput, owner: {id: user.id, name: user.username}, replies: []}]});
     setCommentInput("");
     
@@ -69,7 +70,7 @@ function FullPost({user, setUser, alert}) {
     } else {
       setUser({...user, liked: [...user.liked, post.id]});
       setLikes(likes + 1);
-      alert(owner, "Post Liked", `${user.username} liked your post, '${post.title}'.`, `/posts/${post.id}`);
+      alert(owner.id, "Post Liked", `${user.username} liked your post, '${post.title}'.`, `/posts/${post.id}`);
     }
   }
 
@@ -124,8 +125,8 @@ function FullPost({user, setUser, alert}) {
             </form>
           </div>
           <div className="comments">
-            {post.comments.map(comment => (
-              <Comment message={comment.message} owner={comment.owner} type="comment" replies={comment.replies} likes={comment.likes} post={post} setPost={setPost} id={comment.id} />
+            {post.comments.map((comment, idx) => (
+              <Comment key={idx} message={comment.message} owner={comment.owner} type="comment" replies={comment.replies} likes={comment.likes} post={post} setPost={setPost} id={comment.id} />
             ))}
           </div>
         </div>
