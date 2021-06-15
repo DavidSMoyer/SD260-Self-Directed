@@ -4,6 +4,7 @@ import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import { Link, useHistory } from 'react-router-dom';
 import SmallAcc from './SmallAcc';
 import {useState, useEffect} from 'react';
+import LoadingIcon from './LoadingIcon.js';
 
 function Post({post, user, setUser, alert}) {
   const [postInfo, setPostInfo] = useState(null);
@@ -12,7 +13,7 @@ function Post({post, user, setUser, alert}) {
   const history = useHistory();
 
   const toggleLike = (e) => {
-    if (post.owner.id === user.id) return;
+    if (post.owner === user.id) return;
     e.preventDefault();
     if (user.liked.includes(post.id)) {
       setUser({...user, liked: user.liked.filter(postId => postId !== post.id)});
@@ -20,7 +21,7 @@ function Post({post, user, setUser, alert}) {
     } else {
       setUser({...user, liked: [...user.liked, post.id]});
       setLikes(likes + 1);
-      alert(postInfo.owner.id, "Post Liked", `${user.username} liked your post, '${postInfo.title}'.`, `/post/${postInfo.id}`);
+      alert(postInfo.owner, "Post Liked", `${user.username} liked your post, '${postInfo.title}'.`, `/post/${postInfo.id}`);
     }
   }
 
@@ -31,19 +32,20 @@ function Post({post, user, setUser, alert}) {
       setLikes(users.filter(user => user.liked.includes(post.id)).length);
       setLoaded(true);
     })();
-  }, []);
+  }, [post]);
 
   return (
     <>
       {
-        loaded &&
+        loaded
+        ?
         <Link to={`/post/${postInfo.id}`} className="post-link">
           <div className="post">
             <h3>{postInfo.title}</h3>
             {postInfo.imageURL !== "" ? <img src={postInfo.imageURL}/> : <p>{postInfo.content}</p>}
             <div className="stats">
               <span>
-                {user.liked.includes(postInfo.id) || postInfo.owner.id === user.id ? <FavoriteIcon onClick={toggleLike} className="like-icon" /> : <FavoriteBorderIcon onClick={toggleLike} className="like-icon" />}
+                {user.liked.includes(postInfo.id) || postInfo.owner === user.id ? <FavoriteIcon onClick={toggleLike} className="like-icon" /> : <FavoriteBorderIcon onClick={toggleLike} className="like-icon" />}
                 {likes}
               </span>
               <span>
@@ -55,6 +57,8 @@ function Post({post, user, setUser, alert}) {
             {postInfo.imageURL !== "" && <p>{postInfo.content}</p>}
           </div>
         </Link>
+        :
+        <LoadingIcon />
       }
     </>
   )

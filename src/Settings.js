@@ -30,7 +30,7 @@ function Settings({user, setUser}) {
     setLname(user.lname);
     setUsername(user.username);
     setEmail(user.email);
-    setImageURL(user.imageURL);
+    setImageURL(user.imageURL === undefined ? "" : Uint16Array.imageURL);
   }, [])
 
   const update = (e, func, max) => {
@@ -156,7 +156,7 @@ function Settings({user, setUser}) {
           required
           label="Old Password"
           InputProps={{endAdornment: (
-            <InputAdornment position="end" className="pass-toggle" onClick={() => setOldPassVisible(!oldPassVisible)}>{oldPassVisible ? <VisibilityIcon /> : <VisibilityOffIcon />}</InputAdornment>
+            <InputAdornment position="end" className="pass-toggle" onClick={() => setOldPassVisible(!oldPassVisible)} >{oldPassVisible ? <VisibilityIcon /> : <VisibilityOffIcon />}</InputAdornment>
           )}}
           onChange={(e) => update(e, setOldPassword, 50)}
           type={oldPassVisible ? "text" : "password"}
