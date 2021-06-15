@@ -26,11 +26,7 @@ function CreatePost({user}) {
       content,
       likes: 0,
       comments: [],
-      owner: {
-        name: user.username,
-        img: user.imageURL,
-        id: user.id
-      },
+      owner: user.id,
       private: postPrivate,
       postTime: Date.now()
     }

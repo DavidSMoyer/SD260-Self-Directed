@@ -14,7 +14,7 @@ import User from './User.js';
 import AlertPage from './AlertPage.js';
 import Settings from './Settings.js';
 import Search from './Search.js';
-import {compareSync} from 'bcryptjs';
+import LoadingIcon from './LoadingIcon.js';
 
 function App() {
   const [query, setQuery] = useState("");
@@ -48,7 +48,7 @@ function App() {
             abort();
             return;
           }
-          setUser(oldUser.user);
+          setUser(user);
           localStorage.setItem("auto-login", JSON.stringify(oldUser));
           setLoaded(true);
         })()
@@ -71,8 +71,6 @@ function App() {
       },
       body: JSON.stringify(user)
     });
-    const expire = Date.now() + (24 * 60 * 60 * 1000 * 7);
-    localStorage.setItem("auto-login", JSON.stringify({user, expire}))
   }, [user])
 
   const logout = (e) => {
@@ -97,7 +95,8 @@ function App() {
   return (
     <>
       {
-        loaded &&
+        loaded
+        ?
         <>
           <NotRoute path={["/login","/signup"]}>
             <form className="search" onSubmit={search}>
@@ -169,6 +168,8 @@ function App() {
             </div>
           </div>
         </>
+        :
+        <LoadingIcon />
       }
     </>
   );

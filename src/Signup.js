@@ -55,7 +55,7 @@ function Signup({login}) {
       const userResponse = await uploadUser.json();
       login(userResponse);
       const expire = Date.now() + (24 * 60 * 60 * 1000 * 7);
-      localStorage.setItem("auto-login", JSON.stringify({expire, user: userResponse}));
+      localStorage.setItem("auto-login", JSON.stringify({expire, user: {username: user.username, password: passHash}}));
       history.push("/");
     } else {
       setErrors(["Something went wrong."]);
