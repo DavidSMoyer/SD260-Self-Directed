@@ -11,7 +11,7 @@ function PostList({type, user, account, setUser, query, alert}) {
         let posts = await fetch("http://localhost:5000/posts").then(response => response.json());
         posts.sort((post1, post2) => post2.postTime - post1.postTime);
         if (type === "follow") {
-          posts = posts.filter(post => user.following.includes(post.owner.id));
+          posts = posts.filter(post => user.following.includes(post.owner));
         } else if (type === "search") {
           posts = posts.filter(post => post.title.toLowerCase().includes(query.toLowerCase()) || post.content.toLowerCase().includes(query.toLowerCase()));
         }
@@ -21,7 +21,7 @@ function PostList({type, user, account, setUser, query, alert}) {
           Promise.all(responses.map(response => response.json())).then(owners => {
             posts = posts.filter((post, idx) => !post.private || (post.owner === user.id || (owners[idx].following.includes(user.id) && user.following.includes(owners[idx].id))));
             setPostList(posts);
-          })
+          });
         });
       } else {
         let posts = await fetch(`http://localhost:5000/posts?owner=${account.id}`).then(response => response.json());

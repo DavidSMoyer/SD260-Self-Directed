@@ -56,7 +56,7 @@ function FullPost({user, setUser, alert}) {
     e.preventDefault();
     const id = post.comments.reduce((acc, comment) => comment.id >= acc ? comment.id + 1 : acc, 0);
     console.log(owner);
-    alert(owner.id, "New Comment", [`${user.username} commented on your post, '${post.title}'.`, `${commentInput}`], `/post/${post.id}`);
+    alert(owner.id, "New Comment", `${user.username} commented on your post, '${post.title}'.`, `/post/${post.id}`);
     setPost({...post, comments: [...post.comments, {id, likes: 0, message: commentInput, owner: {id: user.id, name: user.username}, replies: []}]});
     setCommentInput("");
     
@@ -70,7 +70,7 @@ function FullPost({user, setUser, alert}) {
     } else {
       setUser({...user, liked: [...user.liked, post.id]});
       setLikes(likes + 1);
-      alert(owner.id, "Post Liked", `${user.username} liked your post, '${post.title}'.`, `/posts/${post.id}`);
+      alert(owner.id, "Post Liked", `${user.username} liked your post, '${post.title}'.`, `/post/${post.id}`);
     }
   }
 
