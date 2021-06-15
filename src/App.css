@@ -95,6 +95,7 @@ nav {
 .post p {
   padding: 10px;
   margin: 0;
+  overflow-wrap: break-word;
 }
 
 .post .stats {
@@ -115,7 +116,7 @@ nav {
 .post-list {
   padding-top: 100px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 33% 33% 33%;
   grid-gap: 20px;
   width: 90%;
   margin: 0 auto;
@@ -150,6 +151,10 @@ div.small-avatar {
 .post-content {
   border-bottom: 1px solid lightgrey;
   padding-bottom: 20px;
+}
+
+.post-content p {
+  overflow-wrap: break-word;
 }
 
 .post-content h2 {
