@@ -21,7 +21,7 @@ function PostList({type, user, account, setUser, query, alert}) {
           Promise.all(responses.map(response => response.json())).then(owners => {
             posts = posts.filter((post, idx) => !post.private || (post.owner === user.id || (owners[idx].following.includes(user.id) && user.following.includes(owners[idx].id))));
             setPostList(posts);
-          })
+          });
         });
       } else {
         let posts = await fetch(`http://localhost:5000/posts?owner=${account.id}`).then(response => response.json());
