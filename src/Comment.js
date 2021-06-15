@@ -2,7 +2,7 @@ import SmallAcc from './SmallAcc.js';
 import {TextField} from '@material-ui/core';
 import {useState} from 'react';
 
-function Comment({type, message, owner, replies, likes, post, setPost, id}) {
+function Comment({type, message, owner, replies, post, setPost, id, user, alert}) {
   const [reply, setReply] = useState("");
 
   const updateReply = (e) => {
@@ -19,19 +19,25 @@ function Comment({type, message, owner, replies, likes, post, setPost, id}) {
     postClone.comments = postClone.comments.map(loopComment => {
       if (loopComment.id === id) {
         const newId = loopComment.replies.reduce((acc, comment) => comment.id >= acc ? comment.id + 1 : acc, 0);
-        loopComment.replies = [...loopComment.replies, {message: reply, id: newId, owner: {name: owner.name, id: owner.id}}];
+        loopComment.replies = [...loopComment.replies, {message: reply, id: newId, owner: user.id}];
       }
       return loopComment;
     });
     setPost(postClone);
     setReply("");
+
+    let alertUsers = [owner, ...replies.reduce((acc, reply) => acc.includes(reply.owner) ? acc : [...acc, reply.owner], [])];
+    alertUsers = alertUsers.filter(alertUser => alertUser !== user.id);
+    alertUsers.forEach(id => {
+      alert(id, "New Reply", "Someone replied to a conversation you're a part of.", `/post/${post.id}`);
+    })
   }
 
 
   return (
     <>
       <span className={type === "comment" ? "comment" : "reply"}>
-        <SmallAcc owner={owner.id} />
+        <SmallAcc owner={owner} />
         <span className="message">{message}</span>
       </span>
       {
