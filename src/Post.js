@@ -32,7 +32,7 @@ function Post({post, user, setUser, alert}) {
       setLikes(users.filter(user => user.liked.includes(post.id)).length);
       setLoaded(true);
     })();
-  }, []);
+  }, [post]);
 
   return (
     <>

@@ -1,12 +1,13 @@
 import {Avatar, TextField} from '@material-ui/core';
-import {Link, useParams, Redirect} from 'react-router-dom';
+import {Link, useParams, Redirect, useHistory} from 'react-router-dom';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import Comment from './Comment.js';
 import {useState, useEffect} from 'react';
-import { SettingsInputSvideoRounded } from '@material-ui/icons';
+import { AccountBalance, SettingsInputSvideoRounded } from '@material-ui/icons';
 import LoadingIcon from './LoadingIcon.js';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 function FullPost({user, setUser, alert}) {
   const [post, setPost] = useState(undefined);
@@ -15,6 +16,7 @@ function FullPost({user, setUser, alert}) {
   const [loaded, setLoaded] = useState(false);
   const [commentInput, setCommentInput] = useState("");
   const { postId } = useParams();
+  const history = useHistory();
 
   useEffect(() => {
     (async () => {
@@ -32,7 +34,7 @@ function FullPost({user, setUser, alert}) {
       const users = await fetch(`http://localhost:5000/users`).then(response => response.json());
       setLikes(users.filter(user => user.liked.includes(post.id)).length);
     })();
-    fetch(`http://localhost:5000/post/${post.id}`,
+    fetch(`http://localhost:5000/posts/${post.id}`,
     {
       method: "PATCH",
       headers: {
@@ -53,7 +55,8 @@ function FullPost({user, setUser, alert}) {
   const submitComment = (e) => {
     e.preventDefault();
     const id = post.comments.reduce((acc, comment) => comment.id >= acc ? comment.id + 1 : acc, 0);
-    alert(owner, "New Comment", [`${user.username} commented on your post, '${post.title}'.`, `${commentInput}`], `/post/${post.id}`);
+    console.log(owner);
+    alert(owner.id, "New Comment", [`${user.username} commented on your post, '${post.title}'.`, `${commentInput}`], `/post/${post.id}`);
     setPost({...post, comments: [...post.comments, {id, likes: 0, message: commentInput, owner: {id: user.id, name: user.username}, replies: []}]});
     setCommentInput("");
     
@@ -67,8 +70,18 @@ function FullPost({user, setUser, alert}) {
     } else {
       setUser({...user, liked: [...user.liked, post.id]});
       setLikes(likes + 1);
-      alert(owner, "Post Liked", `${user.username} liked your post, '${post.title}'.`, `/posts/${post.id}`);
+      alert(owner.id, "Post Liked", `${user.username} liked your post, '${post.title}'.`, `/posts/${post.id}`);
     }
+  }
+
+  const deletePost = () => {
+    fetch(`http://localhost:5000/posts/${post.id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    });
+    history.push(`/user/${user.id}`);
   }
 
   return (
@@ -79,6 +92,12 @@ function FullPost({user, setUser, alert}) {
         <div className="post-page">
           {((!owner.following.includes(user.id) && post.private && owner !== user.id)) && <Redirect to="/" />}
           <div className="post-content">
+            {
+              owner.id === user.id && 
+              <button className="delete-post" onClick={deletePost}>
+                <DeleteForeverIcon />
+              </button>
+            }
             <h2>{post.title}</h2>
             <Link className="owner" to={`/user/${post.owner}`}>
               <Avatar className="owner-avatar" src={owner.imageURL}>{(owner.imageURL === "" || owner.imageURL === undefined) && owner.username[0].toUpperCase()}</Avatar>
@@ -106,8 +125,8 @@ function FullPost({user, setUser, alert}) {
             </form>
           </div>
           <div className="comments">
-            {post.comments.map(comment => (
-              <Comment message={comment.message} owner={comment.owner} type="comment" replies={comment.replies} likes={comment.likes} post={post} setPost={setPost} id={comment.id} />
+            {post.comments.map((comment, idx) => (
+              <Comment key={idx} message={comment.message} owner={comment.owner} type="comment" replies={comment.replies} likes={comment.likes} post={post} setPost={setPost} id={comment.id} />
             ))}
           </div>
         </div>

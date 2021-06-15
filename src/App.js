@@ -38,7 +38,6 @@ function App() {
         (async () => {
           oldUser.expire = Date.now() + (24 * 60 * 60 * 1000 * 7);
           const userMatch = await fetch(`http://localhost:5000/users?username=${oldUser.user.username}`).then(response => response.json());
-          console.log(userMatch);
           if (userMatch.length === 0) {
             abort();
             return;
