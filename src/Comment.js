@@ -31,14 +31,14 @@ function Comment({type, message, owner, replies, likes, post, setPost, id}) {
   return (
     <>
       <span className={type === "comment" ? "comment" : "reply"}>
-        <SmallAcc owner={owner} />
+        <SmallAcc owner={owner.id} />
         <span className="message">{message}</span>
       </span>
       {
         (type === "comment") && 
         <ul className="reply-list">
-          {replies.map(reply => (
-            <Comment type="reply" owner={reply.owner} message={reply.message} />
+          {replies.map((reply, idx) => (
+            <Comment key={idx} type="reply" owner={reply.owner} message={reply.message} />
           ))}
           <form className="reply-field" onSubmit={postReply}>
             <TextField placeholder="Reply" size="small" value={reply} onChange={updateReply} />

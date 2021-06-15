@@ -32,13 +32,13 @@ function App() {
       setLoaded(true);
       localStorage.removeItem("auto-login");
     }
+
     const oldUser = JSON.parse(localStorage.getItem("auto-login"));
     if (oldUser !== null) {
       if (oldUser.expire > Date.now()) {
         (async () => {
           oldUser.expire = Date.now() + (24 * 60 * 60 * 1000 * 7);
           const userMatch = await fetch(`http://localhost:5000/users?username=${oldUser.user.username}`).then(response => response.json());
-          console.log(userMatch);
           if (userMatch.length === 0) {
             abort();
             return;
@@ -73,7 +73,7 @@ function App() {
     });
   }, [user])
 
-  const logout = (e) => {
+  const logout = () => {
     setUser(null);
     localStorage.removeItem('auto-login');
     history.push("/login");
@@ -120,51 +120,62 @@ function App() {
               <div></div>
             }
             <div className="scroll-container">
-              {<Switch>
-                <Route exact path="/">
-                  {
-                    user === null 
-                    ? 
-                    <Redirect to="/login" />
-                    :
-                    <PostList type="main" user={user} setUser={setUser} alert={alertUser} />
-                  }
-                </Route>
-                <Route exact path="/follow-timeline">
-                  {user === null && <Redirect to="/login" />}
-                  <PostList type="follow" user={user} setUser={setUser} alert={alertUser} />
-                </Route>
-                <Route exact path="/signup">
-                  {user !== null && <Redirect to="/" />}
-                  <Signup login={setUser} />
-                </Route>
-                <Route exact path="/login">
-                  {user !== null && <Redirect to="/" />}
-                  <Login login={setUser} />
-                </Route>
-                <Route exact path="/create">
-                  {user === null && <Redirect to="/login" />}
-                  <CreatePost user={user} />
-                </Route>
-                <Route path="/post/:postId">
-                  {user === null && <Redirect to="/login" />}
-                  <FullPost user={user} setUser={setUser} alert={alertUser} />
-                </Route>
-                <Route path="/user/:accountId">
-                  {user === null && <Redirect to="/login" />}
-                  <User user={user} setUser={setUser} alert={alertUser} />
-                </Route>
-                <Route path="/search/:query">
-                  {user === null && <Redirect to="/login" />}
-                  <Search user={user} setUser={setUser} alert={alertUser} />
-                </Route>
-                <Route path="/alerts" exact>
-                  <AlertPage user={user} setUser={setUser} />
-                </Route>
-                <Route path="/settings" exact>
-                  <Settings user={user} setUser={setUser} />
-                </Route>
-              </Switch>}
+              {
+                <Switch>
+                  <Route exact path="/">
+                    {
+                      user === null 
+                      ? 
+                      <Redirect to="/login" />
+                      :
+                      <PostList type="main" user={user} setUser={setUser} alert={alertUser} />
+                    }
+                  </Route>
+
+                  <Route exact path="/follow-timeline">
+                    {user === null && <Redirect to="/login" />}
+                    <PostList type="follow" user={user} setUser={setUser} alert={alertUser} />
+                  </Route>
+
+                  <Route exact path="/signup">
+                    {user !== null && <Redirect to="/" />}
+                    <Signup login={setUser} />
+                  </Route>
+
+                  <Route exact path="/login">
+                    {user !== null && <Redirect to="/" />}
+                    <Login login={setUser} />
+                  </Route>
+
+                  <Route exact path="/create">
+                    {user === null && <Redirect to="/login" />}
+                    <CreatePost user={user} />
+                  </Route>
+
+                  <Route path="/post/:postId">
+                    {user === null && <Redirect to="/login" />}
+                    <FullPost user={user} setUser={setUser} alert={alertUser} />
+                  </Route>
+
+                  <Route path="/user/:accountId">
+                    {user === null && <Redirect to="/login" />}
+                    <User user={user} setUser={setUser} alert={alertUser} />
+                  </Route>
+
+                  <Route path="/search/:query">
+                    {user === null && <Redirect to="/login" />}
+                    <Search user={user} setUser={setUser} alert={alertUser} />
+                  </Route>
+
+                  <Route path="/alerts" exact>
+                    <AlertPage user={user} setUser={setUser} />
+                  </Route>
+
+                  <Route path="/settings" exact>
+                    <Settings user={user} setUser={setUser} />
+                  </Route>
+                </Switch>
+              }
             </div>
           </div>
         </>

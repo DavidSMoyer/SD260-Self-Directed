@@ -3,7 +3,7 @@ import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import {Link, useHistory} from 'react-router-dom';
 import {useState} from 'react';
-import {compare} from 'bcryptjs';
+import {compare, compareSync} from 'bcryptjs';
 import {Alert, AlertTitle} from '@material-ui/lab';
 
 function Login({login}) {
@@ -17,10 +17,8 @@ function Login({login}) {
     e.preventDefault();
     const searchByName = await fetch(`http://localhost:5000/users?username=${name}`).then(response => response.json()).then(json => json[0]);
     const searchByEmail = await fetch(`http://localhost:5000/users?email=${name}`).then(response => response.json()).then(json => json[0]);
-    console.log(searchByName);
-    console.log(searchByEmail);
-    if ((searchByName && compare(password, searchByName.password)) || (searchByEmail && compare(password, searchByEmail.password))) {
-      const user = searchByName ? searchByName : searchByEmail;
+    const user = searchByName ? searchByName : searchByEmail;
+    if (user !== undefined && compareSync(password, user.password)) {
       login(user);
       const expire = Date.now() + (24 * 60 * 60 * 1000 * 7);
       localStorage.setItem("auto-login", JSON.stringify({expire, user: {username: user.username, password: user.password}}));

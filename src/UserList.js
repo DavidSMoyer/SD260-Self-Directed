@@ -14,7 +14,7 @@ function UserList({query, user}) {
 
   return (
     <div className="user-list">
-      {users.map(user => <SmallAcc owner={{id: user.id, name: user.username}} />)}
+      {users.map(user => <SmallAcc owner={user.id} />)}
     </div>
   )
 }
