@@ -23,7 +23,7 @@ function PostList({type, user, account, setUser, query, alert}) {
           })
         });
       } else {
-        let posts = await fetch(`http://localhost:5000/posts?owner.id=${account.id}`).then(response => response.json());
+        let posts = await fetch(`http://localhost:5000/posts?owner=${account.id}`).then(response => response.json());
         setPostList(posts.filter(post => !post.private || ((account.following.includes(user.id) && user.following.includes(account.id))|| user.id === account.id)));
       }
     })();
@@ -31,10 +31,7 @@ function PostList({type, user, account, setUser, query, alert}) {
 
   return (
     <div className="post-list">
-      {postList.map((post, idx) => {
-        console.log(post);
-        return <Post key={idx} post={post} user={user} setUser={setUser} alert={alert} />
-      })}
+      {postList.map((post, idx) => <Post key={idx} post={post} user={user} setUser={setUser} alert={alert} />)}
     </div>
   )
 }
