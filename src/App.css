@@ -555,6 +555,12 @@ div.user-avatar {
   position: relative;
   left: 99%;
   transform: translateX(-50%);
+  transition: transform 0.2s, color 0.2s;
+}
+
+.delete-post:hover {
+  transform: translateX(-50%) scale(1.3);
+  color: red;
 }
 
 .account .stats a {
@@ -563,4 +569,22 @@ div.user-avatar {
 
 .account .stats a:hover {
   transform: rotateZ(360deg);
+}
+
+a.owner,
+.user-list .small-acc {
+  transition: transform 0.2s;
+}
+
+.post .small-acc {
+  transition: color 0.2s;
+}
+
+a.owner:hover,
+.user-list .small-acc:hover {
+  transform: scale(1.1);
+}
+
+.post .small-acc:hover {
+  color: grey;
 }
